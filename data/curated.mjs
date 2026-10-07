@@ -84,7 +84,7 @@ export const GUIA = [
     info: 'Clásico plato italiano con toque brasileño.', addr: 'Av. Inácio Conceição Vieira, 14-45', hours: 'Todos los días 11:00–22:00 (vie y sáb hasta 23:00)' },
   { id: 'g-coisaboa', cat: 'restaurante', guia: true, name: 'Coisa Boa Gastronomia', lat: -22.334269, lon: -49.075238, rating: '4,6', reviews: 1092,
     info: 'Cocina brasileña del Chef Moa (programa "Mestre do Sabor").', addr: 'R. Monsenhor Claro, 12-64', hours: 'Todos los días 11:30–23:30' },
-  { id: 'g-convivio', cat: 'restaurante', also: ['bar'], guia: true, psd: true, name: 'Convívio Restaurante', lat: -22.331039, lon: -49.059666, rating: '4,5', reviews: 320,
+  { id: 'g-convivio', cat: 'restaurante', guia: true, psd: true, name: 'Convívio Restaurante', lat: -22.331039, lon: -49.059666, rating: '4,5', reviews: 320,
     info: 'Desde 1975: cerveza de barril, bocadillos y feijoada los sábados.', addr: 'Praça Antônio José Miziara', hours: 'Mar–vie 16:30–23:00 · Fines de semana 11:00–23:00 · Lunes cerrado' },
 
   { id: 'g-vr', cat: 'parque', guia: true, psd: true, name: 'Parque Vitória Régia', lat: -22.332148, lon: -49.058760, rating: '4,5', reviews: 10409,
