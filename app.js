@@ -64,7 +64,7 @@
       const short = p.name.replace(/^Tânia Alves · /, '').replace(/ · Tânia Alves$/, '').replace(/^Depto\. /, '').replace(/^Hotel /, '');
       el.innerHTML = `<div class="mk-photo"><div class="mk-photo__ring"></div><div class="mk-photo__img" style="background-image:url('${PHOTO_DIR + p.photos[0]}')"></div><div class="mk-photo__tag">${esc(short.length > 22 ? short.slice(0, 21) + '…' : short)}</div></div>`;
     } else {
-      el.innerHTML = `<div class="mk-dot ${p.psd ? 'is-psd' : ''}">${cat.ico}</div>`;
+      el.innerHTML = `<div class="mk-dot">${cat.ico}</div>`;
     }
     el.setAttribute('role', 'button');
     el.setAttribute('aria-label', p.name);
@@ -189,7 +189,6 @@
       p.rating ? `<span class="tag">⭐ ${esc(p.rating)}${p.reviews ? ` <span style="opacity:.6">(${p.reviews.toLocaleString('es')})</span>` : ''}</span>` : '',
       p.partner ? `<span class="tag tag--partner">♥ Socia UniCPO</span>` : '',
       p.guia ? `<span class="tag">📘 Guía UniCPO</span>` : '',
-      p.psd ? `<span class="tag tag--psd">🎬 Del episodio</span>` : '',
       p.aprox ? `<span class="tag tag--warn">📍 Ubicación aproximada</span>` : '',
     ].join('');
     const actions = [];

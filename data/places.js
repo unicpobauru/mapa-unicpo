@@ -47,6 +47,7 @@ window.PLACES = [{"id":"unicpo-sede","cat":"unicpo","name":"UniCPO · Edificio n
 {"id":"psd-maxdog","cat":"restaurante","psd":true,"name":"Max Dog Hot Dogs & Burguers","lat":-22.330329,"lon":-49.063026,"rating":"2,6","reviews":28,"info":"Hot dogs y hamburguesas.","addr":"R. Ver. Joaquim da Silva Martha, 20-33"},
 {"id":"psd-essencia","cat":"restaurante","psd":true,"name":"Restaurante Essência Oriental","lat":-22.33046,"lon":-49.06297,"info":"Vegetariano / oriental."},
 {"id":"psd-molhin","cat":"restaurante","psd":true,"name":"Molhin de Filé · Comida Afetiva","lat":-22.33103,"lon":-49.06318,"info":"Comida casera."},
+{"id":"restaurante-15","cat":"restaurante","name":"Restaurante 15","lat":-22.3295391,"lon":-49.0628007,"rating":"4,7","reviews":328,"info":"Self-service (comida por kilo) · R$ 40–60.","addr":"R. Padre João, 16-80 · Vila Santa Teresa","tel":"(14) 3223-0348","hours":"Lun–sáb 7:30–14:10 · Domingo cerrado","psd":true},
 {"id":"rodoviaria","cat":"transporte","name":"Terminal Rodoviária de Bauru","lat":-22.312635,"lon":-49.068604,"info":"Aquí llegan los autobuses desde São Paulo (Barra Funda), ~5 h de viaje."},
 {"id":"g0","cat":"farmacia","name":"Farmácia Drogal","lat":-22.325892,"lon":-49.057445,"rating":"5,0","reviews":1428,"info":"Av. Duque de Caxias, 20-05","psd":true},
 {"id":"g1","cat":"farmacia","name":"Drogaria Total Primeiro de Agosto","lat":-22.319612,"lon":-49.065065,"rating":"5,0","reviews":52,"info":"R. Primeiro de Agosto, 14-07"},

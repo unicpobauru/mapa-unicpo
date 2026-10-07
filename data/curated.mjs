@@ -141,6 +141,9 @@ export const PSD_EXTRA = [
 ];
 
 export const EXTRAS = [
+  { id: 'restaurante-15', cat: 'restaurante', name: 'Restaurante 15', lat: -22.3295391, lon: -49.0628007, rating: '4,7', reviews: 328,
+    info: 'Self-service (comida por kilo) · R$ 40–60.', addr: 'R. Padre João, 16-80 · Vila Santa Teresa', tel: '(14) 3223-0348',
+    hours: 'Lun–sáb 7:30–14:10 · Domingo cerrado' },
   { id: 'rodoviaria', cat: 'transporte', name: 'Terminal Rodoviária de Bauru', lat: -22.312635, lon: -49.068604,
     info: 'Aquí llegan los autobuses desde São Paulo (Barra Funda), ~5 h de viaje.' },
 ];
