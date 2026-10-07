@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Todo cerca de UniCPO</title>
+  <meta name="description" content="Manual de Supervivencia del Extranjero en Brasil: hoteles, Airbnb, farmacias, bares, restaurantes y más alrededor de UniCPO en Bauru.">
+  <meta name="theme-color" content="#0b2a4a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%230b2a4a%22/%3E%3Ctext x=%2232%22 y=%2244%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2234%22 fill=%22white%22 text-anchor=%22middle%22%3EU%3C/text%3E%3C/svg%3E">
+  <meta property="og:title" content="Todo cerca de UniCPO · Bauru">
+  <meta property="og:description" content="El mapa del Manual de Supervivencia del Extranjero en Brasil.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="map" aria-label="Mapa alrededor de UniCPO"></div>
+
+  <header class="top">
+    <div class="brand">
+      <span class="brand__ep">Manual de Supervivencia del Extranjero</span>
+      <h1 class="brand__title">Todo cerca de <b>UniCPO</b></h1>
+    </div>
+    <button class="icon-btn" id="btn-list" aria-label="Ver lista">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+  </header>
+
+  <nav class="chips" id="chips" aria-label="Filtros"></nav>
+
+  <div class="fabs">
+    <button class="fab" id="btn-me" aria-label="Mi ubicación">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="7.5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+    </button>
+    <button class="fab fab--brand" id="btn-home" aria-label="Volver a UniCPO">U</button>
+  </div>
+
+  <div class="hint" id="hint">
+    <span class="hint__dot"></span><span>Toca los <b>pines con foto</b> para ver el alojamiento</span>
+  </div>
+
+  <section class="sheet" id="sheet" aria-live="polite" hidden>
+    <div class="sheet__grab"></div>
+    <button class="sheet__close" id="sheet-close" aria-label="Cerrar">×</button>
+    <div class="sheet__body" id="sheet-body"></div>
+  </section>
+
+  <section class="list" id="list" hidden>
+    <div class="list__head">
+      <h2>Cerca de UniCPO</h2>
+      <button class="sheet__close" id="list-close" aria-label="Cerrar">×</button>
+    </div>
+    <p class="list__sub" id="list-sub"></p>
+    <ul class="list__items" id="list-items"></ul>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="data/places.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

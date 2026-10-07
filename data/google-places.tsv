@@ -1,0 +1,105 @@
+cat	name	lat	lon	rating	reviews	extra	cid
+farmacia	Farmácia Drogal	-22.325892	-49.057445	5,0	1428	Av. Duque de Caxias, 20-05	0x94bf67f9faaaf06d:0xb919b0236a783062
+farmacia	Drogaria Total Primeiro de Agosto	-22.319612	-49.065065	5,0	52	R. Primeiro de Agosto, 14-07	0x94bf671e37283631:0x530b884b60f39b3b
+farmacia	Drogasil	-22.326355	-49.057503	4,3	226	Av. Duque de Caxias, 19-70	0x94bf67a97a41de2f:0xbd1035263f270183
+farmacia	Drogaria São Paulo	-22.327675	-49.064104	3,9	102	Av. Duque de Caxias, 25	0x94bf67d71efff83f:0xe709848d018dcf55
+farmacia	Alifarma	-22.316679	-49.064187	4,6	9	R. Marcondes Salgado, 13-03	0x94bf67bdb4a8f273:0xe6387a936a745563
+farmacia	Drogaria São Paulo	-22.326524	-49.058050	4,3	114	Av. Duque de Caxias, 19	0x94bf679219e73363:0x93cbe172908aec6e
+farmacia	Farmácias Nissei	-22.326380	-49.059412	4,2	217	Av. Duque de Caxias, 17-75	0x94bf679fb37e98b5:0x159f22276b6f6408
+farmacia	Farmácias Nissei	-22.339259	-49.067449	4,4	124	Rua Rio Branco	0x94bf670f6f304a91:0x638138b7e679110b
+farmacia	Drogaria São Paulo	-22.337011	-49.066748	4,2	75	Av. Getúlio Vargas	0x94bf671295e798dd:0x353f2a78527d6072
+farmacia	Drogasil	-22.331655	-49.063807	4,5	102	R. Cap. Gomes Duarte, 19	0x94bf67d48a706d79:0x8d4541cb766bf010
+farmacia	Drogasil	-22.329521	-49.070217	4,3	332	Av. Duque de Caxias, 6-80	0x94ce584681f5ca85:0xcb84e8b393d2909c
+farmacia	Farmácias Nissei	-22.329142	-49.070352	4,6	260	R. Rio Branco, 15-78	0x94bf6755c632dbad:0xa45f300e96e8b645
+farmacia	Farmácia Pague Menos	-22.329469	-49.069842	3,8	152	Av. Duque de Caxias, 7-30	0x94bf67a7b17e9f85:0x764cdc6a90bb45d1
+restaurante	Vitica's Pizzaria	-22.325709	-49.053497	4,5	324	Pizzaria · Av. Duque de Caxias, 23-84	0x94bf679f8f40481d:0xef68f4d87614b5b0
+restaurante	Panela Velha – Empório, Bar e Restaurante	-22.325764	-49.057116	4,7	624	Brasileña · R$ 20–40	0x94bf679e64f80d5d:0x4ad58c5c52556699
+restaurante	Dona Leitoa (Boulevard Shopping)	-22.317010	-49.066104	4,2	170	Comida caipira	0x94bf677a2338135f:0xd37f434e807aca8c
+restaurante	Convívio Restaurante	-22.331039	-49.059666	4,5	320	R$ 40–120	0x94bf6774e3285c1f:0xe8f86d9edc9706b7
+restaurante	Dona Naná Marmitaria	-22.320590	-49.064786	4,5	138	R$ 20–40	0x94bf670a1166a03b:0x37253ac203fb2955
+restaurante	Donna Gusta Restaurante & Bar	-22.337985	-49.067882	4,7	942	R$ 20–40	0x94bf670e8ae376e7:0x46ebd0eaf96ce21
+restaurante	Bença Parrilla	-22.336094	-49.068874	4,6	957	Parrilla · R$ 40–100	0x94bf66357779881f:0xe5cab4d64e3a03d2
+restaurante	Sabor do Líbano	-22.335043	-49.067314	4,6	451	Libanesa · R$ 60–80	0x94bf6709444c5459:0xa864358daa1a6dba
+restaurante	Apaloosa's Churrascaria	-22.338459	-49.068283	4,4	3640	Churrascaria · R$ 60–120	0x94bf670e58974bbf:0x8637f44c16f3d766
+restaurante	La Dirna Pizzaria (Tauste Duque)	-22.326096	-49.054485	4,5	334	Pizzaria	0x94bf678bd7ab3c45:0x122a52d752d27877
+restaurante	Delícias Gourmet	-22.329962	-49.051663	4,9	109	R$ 20–40	0x94bf6717688ab2c1:0xee25ba1423aa77e5
+restaurante	Coisa Boa Gastronomia	-22.334269	-49.075238	4,6	1092	Brasileña · R$ 40–120	0x94bf675fb70dd30f:0x77e99412097e07f6
+restaurante	Kibelândia Cozinha Árabe	-22.328781	-49.072295	4,8	809	Árabe · R$ 20–40	0x94bf67a897a841e7:0x850b4ab82f6ad7d8
+restaurante	Yabadu Pizzaria	-22.320881	-49.064428	4,8	37	Pizzaria	0x94bf67003cd95211:0xb84a756343a01859
+restaurante	Garden Pizza Frita	-22.321047	-49.065493	4,8	249	Pizzaria	0x94bf675077b21e49:0xd7c85efa1f58faf7
+restaurante	Nações Pizza	-22.323413	-49.065281	4,6	493	Pizzaria	0x94bf67a398021945:0xbddc52b5ac6f634c
+restaurante	Quando Tudo Acaba em Pizza	-22.316806	-49.064846	4,6	96	Pizzaria	0x94bf674954a0fe2b:0x738248a4b6d7893c
+restaurante	Burguinho Bauru	-22.319701	-49.069407	4,6	223	Hamburguesa	0x94bf67adf50c348b:0xddea90a14cd7bcd4
+restaurante	Refinaria Burger	-22.329252	-49.066871	4,7	13	Hamburguesa	0x94bf670673b54479:0x1ca77d62757f8d06
+restaurante	Simple Burger	-22.333515	-49.066556	5,0	15	Hamburguesa	0x94bf679d32cea467:0x7a5d0d4faeb3df76
+restaurante	Coronel Burgers	-22.328595	-49.063883	4,9	54	Hamburguesa	0x94bf67edf5dbdaa7:0x1419420e4edba20b
+restaurante	SMB Burguer e Smash	-22.342857	-49.049870	5,0	87	Hamburguesa	0x94bf67da61e90407:0xd6e547960578bf7a
+restaurante	Dona Branca (Boulevard Shopping)	-22.316251	-49.066164	4,4	2462	R$ 40–140	0x94bf67b9581b3035:0x6550f77de6633a7c
+restaurante	Lanchonete do Gaúcho	-22.329321	-49.059681	4,9	89	Lanches · R$ 20–40	0x94bf67756e724f1b:0x59916d854b37b90e
+restaurante	Tapajós Lanches	-22.316786	-49.064786	4,8	38	Lanches	0x94bf67bc4665e2a5:0xfc54d1d74607a14a
+restaurante	Milton Lanches	-22.328124	-49.066110	4,8	127	Lanches · R$ 20–40	0x94bf67d153e420ad:0xfe2254d17a9580a1
+restaurante	Miranda's	-22.322051	-49.070158	4,2	309	Lanches	0x94bf67a53425e3f9:0x3c490bd618550faa
+restaurante	Yakisoba na Praça	-22.336913	-49.051571	4,9	41	Japonesa	0x94bf67aea22bb059:0xa720b1ab6efaa17e
+restaurante	Woki Sushi e Yakissoba	-22.337459	-49.051560	4,4	555	Japonesa	0x94bf676d1806e7f5:0x51f47740dde8b110
+restaurante	Yakiniku – A casa do sushi	-22.335119	-49.054703	4,5	146	Japonesa · R$ 140–160	0x94bf670022e94aa1:0xf2fc7bb0082346e8
+restaurante	Mana Poke	-22.331778	-49.068139	4,8	1458	Poke · R$ 40–60	0x94bf6709c44758db:0x22e548c412809a38
+restaurante	Tempero Manero	-22.322507	-49.072663	4,4	768	Self-service · R$ 20–40	0x94bf67b019aaaaa9:0x79a39fcf10587a4e
+restaurante	Nossa Casa Restaurante	-22.319054	-49.060397	4,6	533	Self-service · R$ 20–40	0x94bf67981f01973b:0x60b7687e2d3c0f91
+restaurante	Divino Fogão (Boulevard Shopping)	-22.316468	-49.066521	4,2	1301	R$ 40–60	0x94bf67a3559d5611:0xae34d9d751f355df
+restaurante	Goela na Praça	-22.333131	-49.062445	4,4	180	Padaria/restaurante · R$ 40–60
+bar	Brazuka Bar	-22.326137	-49.062258	4,7	315	R$ 20–40	0x94bf677c883110a1:0xca0461ab70ff6931
+bar	Dalu Bar Nações	-22.326814	-49.061668	4,6	251	R$ 40–60	0x94bf676e854c2d0d:0xb2732e29c578958c
+bar	Dona Pinguetta Clube do Vinil	-22.323679	-49.062077	4,7	378	R$ 20–100	0x94bf67a2055c0891:0xe36445d3908834ee
+bar	Neo Drink & Pub	-22.327850	-49.064773	4,9	62	R$ 40–60	0x94bf67fbcf4efd35:0x82d2cfcacc820d1a
+bar	Bar da Rosa	-22.328506	-49.063091	4,5	2985	R$ 60–80	0x94bf67a06bdfbc47:0xf3c561cec41c7db
+bar	Gastrô Bar	-22.322267	-49.059120	4,9	105	R$ 40–100	0x94bf6767b2b5955b:0x916125c3340d4050
+bar	Bar do Brecha	-22.320939	-49.061025	4,7	3041	R$ 20–100	0x94bf679870f5f01b:0x9d53429a031208e
+bar	Fritz	-22.323574	-49.057496	4,7	532	R$ 20–40	0x94bf679eb9e1db2d:0x7d2605522d462950
+bar	Vossa Breja Botequim	-22.337442	-49.064911	4,7	180	R$ 40–100	0x94bf67dcf14ddc11:0x133053edacaca284
+bar	Botequim do Vitória	-22.330717	-49.059771	4,8	4	R. Cap. Gomes Duarte, 23-80	0x94bf67c94efdfe1b:0xde0bad9c07a021d3
+bar	Vitrola Bar	-22.331074	-49.066013	4,7	532	R$ 40–120	0x94bf670a1a8e2d95:0xf803a287e511c989
+bar	Bar Bamba	-22.337284	-49.065128	4,5	600	R$ 60–140	0x94bf670bf84ab9ad:0xa94c73444063a523
+bar	Esquina do Herbie	-22.330090	-49.053292	4,5	361	R$ 20–40	0x94bf677717f4d84b:0x6ee3d7451a1547e8
+bar	B.O. Bar	-22.332812	-49.072146	4,7	11	R$ 20–40	0x94bf675af7e71fa1:0x9497119430fa8be4
+bar	Seo Bigode Bar	-22.353192	-49.050294	4,6	1538	Av. Getúlio Vargas, 22-86	0x94bf676a15b14e85:0x8666463c426a27d2
+bar	Boteco Paparico	-22.340031	-49.059976	4,3	108	R$ 40–60	0x94bf67005d18b765:0xdc9a4ee047bd940a
+bar	Bar do Português	-22.321928	-49.059180	4,7	1658	R$ 60–140	0x94bf67826910ed17:0xe60d126d8e8744bd
+bar	James Joyce Irish Pub	-22.326058	-49.066908			R. Eng. Saint Martin, 16-02	0x94bf67a6ac3c9f55:0xf3c1b27fef47dae7
+mercado	Tauste Rio Branco	-22.333643	-49.069646	4,6	8563	R. Rio Branco, 20-40	0x94bf67b730187e3b:0xe671cea01714d91d
+mercado	Supermercado São Judas Tadeu	-22.319772	-49.065433	4,1	2665	R. Primeiro de Agosto, 13-43	0x94bf67bcb822fa31:0x6e4c720d85431b48
+mercado	Assaí Atacadista	-22.316339	-49.068618	4,3	3211	R. Marcondes Salgado	0x94bf67c7a5dbfec9:0x3a7d75e4abab7c67
+mercado	Confiança Supermercados – Nações	-22.326909	-49.063131	4,6	6275	Av. Nações Unidas, 17-150	0x94bf6748962fa38d:0x7b447d3fc5915c36
+mercado	Tauste Duque de Caxias	-22.326126	-49.054487	4,7	11988	Av. Duque de Caxias, 22-42	0x94bf679d904dd53d:0x6445660f5a2a40d1
+mercado	Pão de Açúcar	-22.330835	-49.066770	4,3	2349	R. Araújo Leite, 22-50	0x94bf67a726c5168f:0x7b91d611cae1eb88
+cafe	Padaria Nossa Senhora Aparecida	-22.319602	-49.064919	4,7	1166	Panadería	0x94bf67b2179418ad:0xc071d769cc1a9c84
+cafe	Padaria Anadora	-22.321616	-49.062924	4,5	71	Panadería	0x94bf6796676ebb31:0xdd2a6957d8d452a2
+cafe	Padaria Aviação	-22.329535	-49.061818	4,3	347	Panadería	0x94bf67fd8b1dcad7:0xfa6b896e7cd73321
+cafe	Padaria Copacabana	-22.328689	-49.070440	4,6	4206	Panadería	0x94bf67a649884af9:0xee83caaf734aa153
+cafe	Mônica Sorvetes e Sucos	-22.322874	-49.066789	4,7	692	Helados y jugos	0x94bf67a483bdc36f:0x27caa2bdf0c770c5
+cafe	Nord Sorvetes	-22.324773	-49.071542	4,7	382	Helados	0x94bf67468e86d6b7:0x8a49800fa81b0fbf
+cafe	Açaí+Bauru	-22.323359	-49.072350	4,8	57	Açaí	0x94bf6746862baed9:0x9d87022b364fee1a
+cafe	Mr. Mix Milk Shake	-22.322414	-49.071115	4,7	166	Batidos	0x94bf67a551f0074f:0x4bcc2fdd116b405f
+cafe	Go Coffee Getúlio	-22.338324	-49.064632	4,6	23	Café	0x94bf674bd98809a9:0xe62b2cc518f091e1
+cafe	Bem Querer Donuts	-22.316474	-49.066248	4,7	318	Donas	0x94bf6732266a6df5:0x941c0b3f31f5a0d0
+cafe	Café Bauhaus	-22.325146	-49.063402	4,9	40	Café	0x94bf67a18fb35ad9:0xc070cf6be9773542
+cafe	Café Barres	-22.323285	-49.069407	4,9	27	Café	0x94bf67ba94b8d405:0x88a0c8f891a3a563
+cafe	Jolie Café	-22.334143	-49.064376	4,8	532	Café	0x94bf67a921464d3d:0xae965c342e7507a2
+saude	Beneficência Portuguesa – Pronto Atendimento	-22.327648	-49.070360	2,8	28	Urgencias · R. Rio Branco, 13-83	0x94bf67a61261b939:0xd6abb586ea0387c6
+saude	Pronto Socorro Central (público)	-22.330828	-49.078059	4,2	64	Urgencias públicas · R. Rubens Arruda, q. 7	0x94bf67afcc8d02ad:0xaa99d1ac014ce9e5
+saude	Hospital Hapvida Bauru	-22.327896	-49.068957	3,8	201	R. Manoel Bento da Cruz, 8-35	0x94bf673b1a59dcb9:0x146cc4caf4658f7e
+saude	Hospital e Maternidade São Francisco	-22.327969	-49.069286	2,7	134	R. Gustavo Maciel, 15-85	0x94bf67a6595f07eb:0x327b2cafa164cf11
+saude	Unimed Bauru	-22.324197	-49.070794	4,6	336	R. Gustavo Maciel, 11-30	0x94bf67b6da0cbe4d:0xf55949ef7c11f3c2
+cambio	DayCâmbio	-22.337790	-49.067089	4,9	407	R. Gustavo Maciel, 26-60	0x94bf6737824a67d5:0xc92db3d9013b69f4
+cambio	CB Câmbio	-22.331033	-49.063639	4,9	45	Al. Dr. Octávio Pinheiro Brisolla, 3-45	0x94bf67e3fc87d8b7:0xf963ebf481b44dca
+cambio	Travelex (Boulevard Shopping)	-22.316548	-49.066975	4,8	31	Boulevard Shopping	0x94bf67bb8c9b7c57:0x2fc562d517b96066
+cambio	Travelex (Bauru Shopping)	-22.342236	-49.049644	4,6	44	Bauru Shopping, loja 06	0x94bf67665b524723:0x56c762769ad06af9
+cambio	Mondeal Câmbio	-22.339112	-49.066745	4,9	34	R. Luso-Brasileira, 4-44	0x94bf670e74e2805d:0x415b904bd83101c0
+hotel	Hostel Bauru	-22.327872	-49.073636	4,4	267		0x94bf67b75c4b79e5:0xb77a66225857b3c8
+hotel	Hotel Saint Martin	-22.323539	-49.067662	4,3	843		0x94bf67a45d88020d:0xda634a33255f9e93
+hotel	Hotel Nações Plaza	-22.324464	-49.062679	4,0	250		0x94bf67a2467b9847:0x4f2508ddef1b4c41
+hotel	Hotel Cidade de Bauru	-22.321543	-49.073492	3,9	373		0x94bf67af6e640ea5:0x773860b9ba43e088
+hotel	Obeid Plaza Hotel	-22.328782	-49.061332	4,0	1388		0x94bf679fff2d64a5:0x27bc240dd061ffdd
+hotel	City Bauru	-22.334209	-49.055908	4,1	1121		0x94bf6771626c1fa3:0x430fb01e02f26970
+academia	GT Sport Life	-22.319270	-49.069618	5,0	130	R. Araújo Leite, 9-15	0x94bf677390fdab2b:0xff32aff8efe1b2f2
+academia	Allp Academia Fit	-22.325762	-49.067669	4,7	38	R. Araújo Leite, 16-49	0x94bf67bd5e39ab67:0xcca3adf0c788aea8
+academia	Smart Fit Getúlio Vargas	-22.340680	-49.061780			Av. Getúlio Vargas, 8-15
