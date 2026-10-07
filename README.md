@@ -21,3 +21,7 @@ Site mobile do episódio "Coisas perto da UniCPO" do quadro *Manual de Supervive
 1. No Google Cloud Console, crie um projeto e ative a **Maps JavaScript API** (precisa de faturamento ativo; o uso deste site cabe na cota gratuita mensal).
 2. Crie uma API key e restrinja em *Application restrictions → Websites* para `https://unicpobauru.github.io/*`.
 3. Cole a key em `config.js`.
+
+## Publicar uma atualização
+
+Depois de mudar qualquer arquivo, aumente o número `?v=` no `index.html` (ex.: `?v=3` → `?v=4`) para os celulares não usarem a versão antiga do cache.
