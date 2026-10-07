@@ -95,7 +95,9 @@
       fly(p, z, dy = 0) {
         const zoom = Math.max(z || 16, m.getZoom());
         const pt = m.project([p.lat, p.lon], zoom).add([0, dy]);
-        m.flyTo(m.unproject(pt, zoom), zoom, { duration: .6 });
+        // flyTo falla (NaN) si el mapa aún no tiene tamaño, p. ej. pestaña en segundo plano
+        if (m.getSize().x && m.getSize().y) m.flyTo(m.unproject(pt, zoom), zoom, { duration: .6 });
+        else m.setView(m.unproject(pt, zoom), zoom, { animate: false });
       },
       zoom: () => m.getZoom(),
     };
