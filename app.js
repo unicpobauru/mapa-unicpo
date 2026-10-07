@@ -46,6 +46,8 @@
     return { short: `${(d / 1000).toFixed(1).replace('.', ',')} km`, long: `🚗 ~${min} min en auto/Uber · ${(d / 1000).toFixed(1).replace('.', ',')} km`, walk: false, d };
   }
   const isRich = p => p.photos && p.photos.length;
+  // un lugar puede estar en más de una categoría (ej.: bar y restaurante)
+  const visible = p => active.has(p.cat) || (p.also || []).some(k => active.has(k));
   const gmapsSearch = p => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ', Bauru - SP')}`;
   const gmapsDir = (p, walk) => `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}&travelmode=${walk ? 'walking' : 'driving'}`;
 
@@ -146,7 +148,7 @@
   // ---------- chips ----------
   function counts() {
     const c = {};
-    PLACES.forEach(p => { c[p.cat] = (c[p.cat] || 0) + 1; });
+    PLACES.forEach(p => [p.cat, ...(p.also || [])].forEach(k => { c[k] = (c[k] || 0) + 1; }));
     return c;
   }
   function renderChips() {
@@ -170,9 +172,9 @@
   function applyFilters() {
     markers.forEach(({ place, handle }) => {
       if (place.cat === 'unicpo') return;
-      handle.show(active.has(place.cat));
+      handle.show(visible(place));
     });
-    if (current && !active.has(current.cat) && current.cat !== 'unicpo') closeSheet();
+    if (current && !visible(current) && current.cat !== 'unicpo') closeSheet();
   }
 
   // ---------- sheet ----------
@@ -234,7 +236,7 @@
 
   // ---------- list ----------
   function renderList() {
-    const items = PLACES.filter(p => p.cat !== 'unicpo' && active.has(p.cat))
+    const items = PLACES.filter(p => p.cat !== 'unicpo' && visible(p))
       .map(p => ({ p, dl: distLabel(p) }))
       .sort((a, b) => a.dl.d - b.dl.d);
     $('#list-sub').textContent = items.length ? `${items.length} lugares · ordenados por distancia desde UniCPO` : 'Activa alguna categoría arriba para ver lugares.';
