@@ -20,6 +20,8 @@
   const PLACES = window.PLACES || [];
   const HOME = PLACES.find(p => p.id === 'unicpo-sede');
   const PHOTO_DIR = 'img/hospedaje/';
+  // Zoom inicial: con 15 los pines alrededor de UniCPO se pisan y es difícil tocarlos
+  const START_ZOOM = 16;
   const WA_MSG = n => `¡Hola! Soy estudiante de UniCPO y vi "${n}" en el mapa del Manual de Supervivencia. ¿Tiene disponibilidad?`;
 
   const active = new Set(ORDER);
@@ -54,6 +56,7 @@
     const el = document.createElement('div');
     el.className = 'mk';
     if (p.cat === 'unicpo') {
+      el.classList.add('mk--unicpo');
       const main = p.id === 'unicpo-sede';
       el.innerHTML = `<div class="mk-unicpo ${main ? '' : 'is-secondary'}"><div class="mk-unicpo__pin"><span>U</span></div><div class="mk-unicpo__label">${main ? 'UniCPO' : 'UniCPO · H. Pinto'}</div></div>`;
       return el;
@@ -73,7 +76,7 @@
 
   // ---------- providers ----------
   function leafletProvider() {
-    const m = L.map('map', { zoomControl: false, attributionControl: true }).setView([HOME.lat, HOME.lon], 15);
+    const m = L.map('map', { zoomControl: false, attributionControl: true }).setView([HOME.lat, HOME.lon], START_ZOOM);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -106,7 +109,7 @@
   function googleProvider() {
     const gm = google.maps;
     const m = new gm.Map(document.getElementById('map'), {
-      center: { lat: HOME.lat, lng: HOME.lon }, zoom: 15, disableDefaultUI: true, gestureHandling: 'greedy', clickableIcons: false,
+      center: { lat: HOME.lat, lng: HOME.lon }, zoom: START_ZOOM, disableDefaultUI: true, gestureHandling: 'greedy', clickableIcons: false,
       styles: [
         { featureType: 'poi', elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
         { featureType: 'poi.business', stylers: [{ visibility: 'off' }] },
@@ -141,7 +144,7 @@
     };
   }
 
-  function zoomClass(z) { document.getElementById('map').classList.toggle('zoom-low', z < 16); }
+  function zoomClass(z) { document.getElementById('map').classList.toggle('zoom-low', z < 17); }
 
   // ---------- chips ----------
   function counts() {
@@ -269,7 +272,7 @@
   // ---------- misc ----------
   function hideHint() { $('#hint').classList.add('is-hidden'); }
   setTimeout(hideHint, 9000);
-  $('#btn-home').addEventListener('click', () => { closeSheet(); map.fly(HOME, 15); });
+  $('#btn-home').addEventListener('click', () => { closeSheet(); map.fly(HOME, START_ZOOM); });
   let me = null;
   $('#btn-me').addEventListener('click', () => {
     if (!navigator.geolocation) return;
@@ -283,7 +286,7 @@
   // ---------- boot ----------
   function boot(provider) {
     map = provider;
-    zoomClass(15);
+    zoomClass(START_ZOOM);
     map.circle(400, '5 min a pie');
     map.circle(800, '10 min a pie');
     const sorted = [...PLACES].sort((a, b) => b.lat - a.lat);

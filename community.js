@@ -93,22 +93,28 @@
       : '';
     if (!ENABLED || !VOTABLE.includes(p.cat)) return google ? `<div class="rates">${google}</div>` : '';
 
+    // El cuadro de la nota UniCPO también es el botón para votar: queda arriba en la ficha,
+    // visible sin tener que bajar (en hoteles con foto el formulario queda bajo el pliegue).
+    const mine = store.get('mapa-my-votes', {})[p.id];
+    const cta = `<span class="rate__cta">${mine ? 'Cambiar mi nota ›' : 'Calificar ›'}</span>`;
     let uni;
     if (s && s.n) {
       const total = s.comm.facil + s.comm.esfuerzo + s.comm.dificil;
       const pct = total ? Math.round(s.comm.facil / total * 100) : 0;
-      uni = `<div class="rate rate--uni">
+      uni = `<button type="button" class="rate rate--uni" data-vote-jump>
           <span class="rate__who">🎓 Alumnos UniCPO</span>
           <span class="rate__num">${fmt(s.avg.toFixed(1))}<small>★</small></span>
           <span class="rate__sub">${s.n} ${s.n === 1 ? 'voto' : 'votos'} · hispanohablantes</span>
           ${total ? `<span class="rate__comm">💬 ${pct}% se comunicó fácil</span>` : ''}
-        </div>`;
+          ${cta}
+        </button>`;
     } else {
-      uni = `<div class="rate rate--uni rate--empty">
+      uni = `<button type="button" class="rate rate--uni rate--empty" data-vote-jump>
           <span class="rate__who">🎓 Alumnos UniCPO</span>
           <span class="rate__num">—</span>
           <span class="rate__sub">Aún sin votos. ¡Sé el primero!</span>
-        </div>`;
+          ${cta}
+        </button>`;
     }
     return `<div class="rates">${uni}${google}</div>
       <p class="rates__note">La <b>nota UniCPO</b> la dan nuestros alumnos extranjeros: muestra cómo atienden a quien habla español. La de Google es del público general.</p>`;
@@ -176,7 +182,10 @@
       const paint = () => vote.querySelectorAll('.star').forEach(b => { const on = +b.dataset.star <= stars; b.classList.toggle('is-on', on); b.setAttribute('aria-checked', String(+b.dataset.star === stars)); });
       const check = () => { send.disabled = !(stars && form.comm.value && form.alumno.checked); };
       if (mine) { stars = mine.stars; paint(); const r = form.querySelector(`input[name=comm][value="${mine.comm}"]`); if (r) r.checked = true; form.alumno.checked = true; }
-      vote.querySelector('[data-vote-open]').addEventListener('click', e => { e.currentTarget.hidden = true; form.hidden = false; check(); });
+      const openForm = () => { vote.querySelector('[data-vote-open]').hidden = true; form.hidden = false; check(); };
+      vote.querySelector('[data-vote-open]').addEventListener('click', openForm);
+      const jump = root.querySelector('[data-vote-jump]');
+      if (jump) jump.addEventListener('click', () => { openForm(); form.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
       vote.querySelector('[data-vote-cancel]').addEventListener('click', () => { form.hidden = true; vote.querySelector('[data-vote-open]').hidden = false; msg(form, ''); });
       vote.querySelectorAll('.star').forEach(b => b.addEventListener('click', () => { stars = +b.dataset.star; paint(); check(); }));
       form.addEventListener('change', check);
