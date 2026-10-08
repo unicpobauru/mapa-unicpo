@@ -12,7 +12,7 @@ export const UNICPO = [
 ];
 
 export const HOSPEDAJE = [
-  // --- Socia Tânia Alves (Airbnb / apartamentos) ---
+  // --- Aliada Tânia Alves (Airbnb / apartamentos) ---
   { id: 'tania-casa-1', cat: 'airbnb', name: 'Tânia Alves · Airbnb Casa 1', lat: -22.32795, lon: -49.05985, aprox: true, partner: true,
     info: 'Ideal para compartir con compañeros: buen precio al dividir entre varios.',
     near: 'Cerca del edificio Hermínio Pinto', photos: ['tania-casa-1.jpg'],

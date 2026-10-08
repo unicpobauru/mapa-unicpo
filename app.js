@@ -191,7 +191,7 @@
     const tags = [
       dl ? `<span class="tag">${dl.long}</span>` : '',
       C.isFavorite(p.id) ? `<span class="tag tag--fav">⭐ Favorito UniCPO</span>` : '',
-      p.partner ? `<span class="tag tag--partner">♥ Socia UniCPO</span>` : '',
+      p.partner ? `<span class="tag tag--partner">♥ Aliada UniCPO</span>` : '',
       p.guia ? `<span class="tag">📘 Guía UniCPO</span>` : '',
       p.aprox ? `<span class="tag tag--warn">📍 Ubicación aproximada</span>` : '',
     ].join('');
@@ -220,7 +220,7 @@
       ${p.tel ? `<p class="p-row"><b>Teléfono:</b> ${esc(p.tel)}</p>` : ''}
       <div class="p-actions">${actions.join('')}</div>
       ${C.voteHTML(p)}
-      ${L.club ? `<a class="club" target="_blank" rel="noopener" href="${L.club}"><b>Club de Beneficios Tânia Alves</b>Quien se hospeda con nuestra socia tiene acceso a descuentos. Toca para consultar.</a>` : ''}
+      ${L.club ? `<a class="club" target="_blank" rel="noopener" href="${L.club}"><b>Club de Beneficios Tânia Alves</b>Quien se hospeda con nuestra aliada tiene acceso a descuentos. Toca para consultar.</a>` : ''}
       ${C.reportHTML(p)}
     `;
     C.mount($('#sheet-body'), p, () => { if (current === p) renderSheet(p); });
@@ -261,7 +261,7 @@
       const ico = isRich(p) ? `<span class="li__ico" style="--c:${c.c};background-image:url('${PHOTO_DIR + p.photos[0]}')"></span>` : `<span class="li__ico" style="--c:${c.c}">${c.ico}</span>`;
       const s = C.statsFor(p.id);
       const uni = s && s.n ? ` · 🎓 ${String(s.avg.toFixed(1)).replace('.', ',')}` : '';
-      return `<li><button class="li" data-id="${p.id}">${ico}<span class="li__txt"><span class="li__name">${C.isFavorite(p.id) ? '<span class="li__fav" title="Favorito UniCPO">⭐</span> ' : ''}${esc(p.name)}</span><span class="li__sub">${c.label}${uni}${p.rating ? ' · G ' + esc(p.rating) : ''}${p.partner ? ' · Socia UniCPO' : ''}</span></span><span class="li__d">${dl.short}</span></button></li>`;
+      return `<li><button class="li" data-id="${p.id}">${ico}<span class="li__txt"><span class="li__name">${C.isFavorite(p.id) ? '<span class="li__fav" title="Favorito UniCPO">⭐</span> ' : ''}${esc(p.name)}</span><span class="li__sub">${c.label}${uni}${p.rating ? ' · G ' + esc(p.rating) : ''}${p.partner ? ' · Aliada UniCPO' : ''}</span></span><span class="li__d">${dl.short}</span></button></li>`;
     }).join('');
   }
   function closeList() { $('#list').hidden = true; }
