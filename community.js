@@ -1,12 +1,13 @@
 // Nota de los alumnos UniCPO + reportes de soporte.
 // Habla con el Apps Script de backend/Code.gs (config.js → apiUrl).
-// Sin apiUrl la sección se oculta; con ?demo en la URL funciona en modo prueba (solo en este navegador).
+// Sin apiUrl la sección se oculta. Con ?demo en la URL funciona en modo prueba (solo en este navegador),
+// aunque haya apiUrl: ?demo NUNCA envía nada a la planilla real.
 (function () {
   'use strict';
 
   const cfg = window.MAP_CONFIG || {};
-  const API = (cfg.apiUrl || '').trim();
-  const DEMO = !API && /[?&]demo\b/.test(location.search);
+  const DEMO = /[?&]demo\b/.test(location.search);
+  const API = DEMO ? '' : (cfg.apiUrl || '').trim();
   const ENABLED = !!API || DEMO;
   // en demo, "mi nota" se guarda aparte para no mezclarse con los votos reales
   const MY_VOTES = DEMO ? 'demo-my-votes' : 'mapa-my-votes';
@@ -67,6 +68,9 @@
       s.n++; s.sum += v.stars; s.comm[v.comm]++;
     });
     Object.values(out).forEach(s => { s.avg = Math.round(s.sum / s.n * 10) / 10; delete s.sum; });
+    // en demo basta 1 reporte "cerró" para ver el aviso (en la planilla real son 3 dispositivos distintos)
+    out._closed = {};
+    store.get('demo-reports', []).filter(r => r.tipo === 'cerrado').forEach(r => { out._closed[r.placeId] = (out._closed[r.placeId] || 0) + 1; });
     return out;
   }
   function demoPost(b) {
@@ -243,6 +247,7 @@
     load: loadStats,
     onChange: fn => listeners.push(fn),
     statsFor: id => stats[id],
+    closedCount: id => ((stats._closed || {})[id] || 0),
     ratingsHTML, voteHTML, reportHTML, mount,
   };
 })();

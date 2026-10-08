@@ -236,3 +236,8 @@ button.rate { font: inherit; text-align: left; cursor: pointer; }
 
 /* [hidden] tiene que ganar a display:flex/grid de .btn, .p-actions etc. */
 [hidden] { display: none !important; }
+
+/* "Posiblemente cerrado": 3+ alumnos reportaron que cerró y el equipo aún no lo revisó */
+.maybe-closed { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 10px; padding: 10px 12px; border-radius: 14px;
+  background: #fff4e5; border: 1.5px solid #f5c26b; color: #6b4300; font-size: 13.5px; line-height: 1.45; }
+.mk.is-maybe-closed .mk-dot, .mk.is-maybe-closed .mk-photo { opacity: .45; filter: grayscale(1); }

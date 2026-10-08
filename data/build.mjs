@@ -42,6 +42,37 @@ for (const p of all) if (ig[p.id]) p.ig = ig[p.id];
 const unknownIg = Object.keys(ig).filter(id => !all.some(p => p.id === id));
 if (unknownIg.length) console.warn('instagram.json tiene ids que no existen:', unknownIg.join(', '));
 
+// Correcciones de la planilla (hoja "Correcciones"), bajadas cada lunes por .github/workflows/semanal.yml
+const CATS_OK = ['restaurante', 'bar', 'cafe', 'hotel', 'airbnb', 'farmacia', 'mercado', 'parque', 'salud', 'cambio', 'shopping', 'gimnasio', 'transporte'];
+const inBauru = (lat, lon) => lat > -22.45 && lat < -22.2 && lon > -49.2 && lon < -48.9;
+const corrFile = path.join(dir, 'corrections.json');
+const corrections = fs.existsSync(corrFile) ? (JSON.parse(fs.readFileSync(corrFile, 'utf8')).corrections || []) : [];
+const closed = new Set();
+for (const c of corrections) {
+  const where = `fila ${c.row}`;
+  if (c.id) {
+    const p = all.find(x => x.id === c.id);
+    if (!p) { console.warn(`[correcciones] ${where}: el ID "${c.id}" no existe, se ignora`); continue; }
+    if (c.estado === 'Cerrado') { closed.add(p.id); console.log(`[correcciones] ${where}: ${p.name} → CERRADO (sale del mapa)`); continue; }
+    for (const k of ['name', 'addr', 'hours', 'tel', 'ig', 'info']) if (c[k]) p[k] = c[k];
+    if (c.cat && CATS_OK.includes(c.cat)) p.cat = c.cat;
+    if (c.lat !== null && c.lon !== null) {
+      if (inBauru(c.lat, c.lon)) { p.lat = c.lat; p.lon = c.lon; delete p.aprox; } else console.warn(`[correcciones] ${where}: coordenada fuera de Bauru, se ignora`);
+    }
+    console.log(`[correcciones] ${where}: ${p.name} actualizado`);
+  } else {
+    if (!c.name || !CATS_OK.includes(c.cat) || c.lat === null || c.lon === null || !inBauru(c.lat, c.lon)) {
+      console.warn(`[correcciones] ${where}: lugar nuevo incompleto (falta nombre, categoría o coordenada válida), se ignora`);
+      continue;
+    }
+    const id = `${slug(c.name)}-${coordTag(c.lat, c.lon)}`;
+    if (all.some(x => x.id === id)) { console.warn(`[correcciones] ${where}: "${c.name}" ya existe, se ignora`); continue; }
+    all.push({ id, cat: c.cat, name: c.name, lat: c.lat, lon: c.lon, addr: c.addr || undefined, hours: c.hours || undefined, tel: c.tel || undefined, ig: c.ig || undefined, info: c.info || undefined });
+    console.log(`[correcciones] ${where}: NUEVO lugar "${c.name}" (${id})`);
+  }
+}
+for (let i = all.length - 1; i >= 0; i--) if (closed.has(all[i].id)) all.splice(i, 1);
+
 const ids = all.map(p => p.id);
 const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
 if (dup.length) throw new Error('ids duplicados: ' + dup.join(', '));

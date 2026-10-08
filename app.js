@@ -49,6 +49,7 @@
   }
   const isRich = p => p.photos && p.photos.length;
   const gmapsSearch = p => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ', Bauru - SP')}`;
+  const streetView = p => `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${p.lat},${p.lon}`;
   const gmapsDir = (p, walk) => `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lon}&travelmode=${walk ? 'walking' : 'driving'}`;
 
   // ---------- marker DOM ----------
@@ -198,6 +199,8 @@
     if (p.ig) actions.push(`<a class="btn btn--ig" target="_blank" rel="noopener" href="https://www.instagram.com/${encodeURIComponent(p.ig)}/">@${esc(p.ig)}</a>`);
     if (p.tel && !L.whatsapp) actions.push(`<a class="btn btn--ghost" href="tel:${p.tel.replace(/\D/g, '')}">Llamar</a>`);
     if (p.cat !== 'unicpo' && !p.aprox) actions.push(`<a class="btn btn--ghost" target="_blank" rel="noopener" href="${gmapsDir(p, dl && dl.walk)}">Cómo llegar</a>`);
+    // Street View por link: gratis, abre la app/sitio de Google Maps en el punto exacto
+    if (!p.aprox) actions.push(`<a class="btn btn--ghost" target="_blank" rel="noopener" href="${streetView(p)}">👁 Ver la calle</a>`);
     actions.push(`<a class="btn btn--ghost" target="_blank" rel="noopener" href="${gmapsSearch(p)}">Ver en Google Maps</a>`);
     if (actions.length % 2) actions[actions.length - 1] = actions[actions.length - 1].replace('class="btn ', 'class="btn btn--full ');
 
@@ -206,6 +209,7 @@
       <span class="p-cat" style="--c:${cat.c}">${cat.ico} ${cat.label}${p.far ? ' · más alejado' : ''}</span>
       <h2 class="p-name">${esc(p.name)}</h2>
       <div class="p-meta">${tags}</div>
+      ${C.closedCount(p.id) ? `<p class="maybe-closed">⚠️ <span><b>Posiblemente cerrado.</b> ${C.closedCount(p.id) === 1 ? "1 alumno avisó" : C.closedCount(p.id) + " alumnos avisaron"} que el lugar cerró. Estamos verificando: confirma antes de ir.</span></p>` : ''}
       ${C.ratingsHTML(p)}
       ${p.info ? `<p class="p-info">${esc(p.info)}</p>` : ''}
       ${p.addr ? `<p class="p-row"><b>Dirección:</b> ${esc(p.addr)}</p>` : ''}
@@ -305,6 +309,7 @@
       // si la persona ya está votando o reportando, no se redibuja (cerraría el formulario)
       const busy = document.querySelector('#sheet-body [data-vote-form]:not([hidden]), #sheet-body .report__box:not([hidden])');
       if (current && !busy) renderSheet(current);
+      markers.forEach(m => m.el.classList.toggle('is-maybe-closed', !!C.closedCount(m.place.id)));
       if (!$('#list').hidden) renderList();
     });
     C.load();

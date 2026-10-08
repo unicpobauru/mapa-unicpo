@@ -1,0 +1,56 @@
+# Cada lunes baja la hoja "Correcciones" de la planilla, regenera data/places.js y vuelve a publicar el mapa.
+# También se puede ejecutar a mano: GitHub → pestaña Actions → "Actualización semanal del mapa" → Run workflow.
+name: Actualización semanal del mapa
+
+on:
+  schedule:
+    - cron: '0 11 * * 1'   # lunes 11:00 UTC = 08:00 en Bauru
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: semanal
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bajar correcciones de la planilla
+        run: |
+          API=$(grep -oE "https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec" config.js | head -1)
+          if [ -z "$API" ]; then echo "config.js no tiene apiUrl"; exit 1; fi
+          curl -sSL --retry 3 --retry-delay 5 "$API?action=export" -o /tmp/corrections.json
+          # Si el backend no respondió con JSON válido, no tocamos nada (mejor no publicar que publicar algo roto)
+          node -e "const j=require('/tmp/corrections.json'); if(!j.ok||!Array.isArray(j.corrections)) process.exit(1); console.log('correcciones recibidas:', j.corrections.length)"
+          node -e "const j=require('/tmp/corrections.json'); delete j.generated; require('fs').writeFileSync('data/corrections.json', JSON.stringify(j, null, 2)+'\n')"
+
+      - name: Regenerar datos del mapa
+        run: node data/build.mjs
+
+      - name: Publicar si algo cambió
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data/; then
+            echo "Sin cambios esta semana."
+            exit 0
+          fi
+          # nuevo número de versión para que los celulares no usen la copia vieja
+          sed -i -E "s/(data\/places\.js\?v=)[^\"]+/\1$(date -u +%Y%m%d%H%M)/" index.html
+          git config user.name "Mapa UniCPO (robot)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ index.html
+          git commit -m "Actualización semanal desde la planilla ($(date -u +%Y-%m-%d))"
+          git push
+          # los push hechos con el token del robot no disparan GitHub Pages solos: se pide la publicación
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
