@@ -35,6 +35,7 @@ Tudo fica numa **Planilha Google da UniCPO**. É grátis e não precisa de cart�
     (no Google Maps: clique com o botão direito no lugar → os números aparecem no topo do menu; clique para copiar).
   - A coluna *Nota interna* nunca é publicada.
   - Não quer esperar a segunda? No GitHub: **Actions → "Actualización semanal del mapa" → Run workflow**.
+- **Config**: na linha "E-mails que reciben los reportes", coloque os e-mails do CS separados por vírgula (ex.: `cs@unicpo.com.br, marketingunicpo@gmail.com`). Vale na hora, sem mexer em código.
 - **Lugares**: lista de todos os lugares do mapa com o ID e o link. Atualiza sozinha toda segunda às 6h
   (ou no menu da planilha **Mapa UniCPO → Actualizar lista de lugares**).
 

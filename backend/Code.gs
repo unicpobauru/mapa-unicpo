@@ -13,7 +13,7 @@
  */
 
 const CONFIG = {
-  NOTIFY_EMAIL: true,          // envía un e-mail al dueño de la planilla por cada reporte nuevo
+  NOTIFY_EMAIL: true,          // envía un e-mail por cada reporte nuevo (a quién: hoja "Config")
   MAX_VOTES_PER_HOUR: 40,      // por dispositivo
   MAX_REPORTS_PER_DAY: 5,      // por dispositivo
   STATS_CACHE_SECONDS: 60,
@@ -29,6 +29,7 @@ const SHEETS = {
     headers: ['Lugar ID', 'Estado', 'Nombre', 'Categoría', 'Dirección', 'Horario', 'Teléfono', 'Instagram', 'Descripción', 'Latitud', 'Longitud', 'Nota interna (no se publica)'],
   },
   places: { name: 'Lugares', headers: ['Lugar ID', 'Nombre', 'Categoría', 'Dirección', 'Ver en el mapa'] },
+  config: { name: 'Config', headers: ['Configuración', 'Valor'] },
 };
 
 const COMM = ['facil', 'esfuerzo', 'dificil'];
@@ -174,7 +175,7 @@ function saveReport_(placeId, placeName, device, body) {
   if (CONFIG.NOTIFY_EMAIL) {
     try {
       MailApp.sendEmail({
-        to: Session.getEffectiveUser().getEmail(),
+        to: notifyEmails_(),
         subject: '[Mapa UniCPO] Reporte: ' + REPORT_TYPES[tipo] + ' — ' + placeName,
         body: 'Lugar: ' + placeName + ' (' + placeId + ')\nTipo: ' + REPORT_TYPES[tipo] + '\nDetalle: ' + (detalle || '—') +
           '\n\nRevisa la hoja "Reportes" de la planilla:\n' + SpreadsheetApp.getActiveSpreadsheet().getUrl(),
@@ -253,6 +254,32 @@ function setupCorrectionsSheet_(nPlaces) {
   sh.getRange('J1').setNote('En Google Maps: clic derecho sobre el lugar → copia los números (ej.: -22.3304, -49.0622).');
 }
 
+// ---------- Config (quién recibe los e-mails de reporte) ----------
+
+const CONFIG_EMAILS_LABEL = 'E-mails que reciben los reportes (separados por coma)';
+
+/** Crea la fila de e-mails en la hoja "Config" si todavía no existe (no pisa lo que el equipo ya escribió). */
+function setupConfigSheet_() {
+  const sh = sheet_(SHEETS.config);
+  const labels = sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, 1).getValues().map(r => r[0]) : [];
+  if (labels.indexOf(CONFIG_EMAILS_LABEL) < 0) {
+    sh.appendRow([CONFIG_EMAILS_LABEL, Session.getEffectiveUser().getEmail()]);
+  }
+  sh.autoResizeColumns(1, 2);
+}
+
+/** E-mails de la hoja "Config"; si está vacía o inválida, el dueño de la planilla. */
+function notifyEmails_() {
+  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEETS.config.name);
+  let list = [];
+  if (sh && sh.getLastRow() > 1) {
+    const rows = sh.getRange(2, 1, sh.getLastRow() - 1, 2).getValues();
+    const row = rows.find(r => r[0] === CONFIG_EMAILS_LABEL);
+    if (row) list = String(row[1]).split(/[,;\s]+/).map(s => s.trim()).filter(s => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(s));
+  }
+  return (list.length ? list : [Session.getEffectiveUser().getEmail()]).join(',');
+}
+
 function setupReportsSheet_() {
   const sh = sheet_(SHEETS.reports);
   sh.getRange(2, 7, 1000, 1).setDataValidation(
@@ -307,6 +334,7 @@ function setup() {
   sheet_(SHEETS.reports);
   sheet_(SHEETS.corrections);
   sheet_(SHEETS.places);
+  setupConfigSheet_();
   setupReportsSheet_();
   actualizarListaDeLugares();
 
