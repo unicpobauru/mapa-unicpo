@@ -302,7 +302,9 @@
     if (target) openPlace(target, true);
     // las notas de los alumnos llegan después; se refresca lo que esté abierto
     C.onChange(() => {
-      if (current) renderSheet(current);
+      // si la persona ya está votando o reportando, no se redibuja (cerraría el formulario)
+      const busy = document.querySelector('#sheet-body [data-vote-form]:not([hidden]), #sheet-body .report__box:not([hidden])');
+      if (current && !busy) renderSheet(current);
       if (!$('#list').hidden) renderList();
     });
     C.load();
