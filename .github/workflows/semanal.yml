@@ -29,9 +29,17 @@ jobs:
         run: |
           API=$(grep -oE "https://script\.google\.com/macros/s/[A-Za-z0-9_-]+/exec" config.js | head -1)
           if [ -z "$API" ]; then echo "config.js no tiene apiUrl"; exit 1; fi
-          curl -sSL --retry 3 --retry-delay 5 "$API?action=export" -o /tmp/corrections.json
-          # Si el backend no respondió con JSON válido, no tocamos nada (mejor no publicar que publicar algo roto)
-          node -e "const j=require('/tmp/corrections.json'); if(!j.ok||!Array.isArray(j.corrections)) process.exit(1); console.log('correcciones recibidas:', j.corrections.length)"
+          # Apps Script a veces responde una página HTML de error temporal: se reintenta hasta tener JSON válido.
+          # Si nunca llega, no tocamos nada (mejor no publicar que publicar algo roto).
+          ok=0
+          for i in 1 2 3 4 5 6; do
+            curl -sSL -A "Mozilla/5.0 (mapa-unicpo robot)" "$API?action=export&t=$(date +%s)" -o /tmp/corrections.json || true
+            if node -e "const j=JSON.parse(require('fs').readFileSync('/tmp/corrections.json','utf8')); if(!j.ok||!Array.isArray(j.corrections)) process.exit(1); console.log('correcciones recibidas:', j.corrections.length)" 2>/dev/null; then ok=1; break; fi
+            echo "Intento $i: la planilla no respondió JSON. Respuesta:"
+            head -c 400 /tmp/corrections.json | sed -e 's/<[^>]*>/ /g' | tr -s ' \n' ' '; echo
+            sleep $((i * 10))
+          done
+          [ "$ok" = 1 ] || { echo "No se pudo leer la planilla. No se publica nada esta vez."; exit 1; }
           node -e "const j=require('/tmp/corrections.json'); delete j.generated; require('fs').writeFileSync('data/corrections.json', JSON.stringify(j, null, 2)+'\n')"
 
       - name: Regenerar datos del mapa
