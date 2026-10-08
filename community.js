@@ -204,6 +204,7 @@
           const my = store.get(MY_VOTES, {}); my[p.id] = { stars, comm: form.comm.value }; store.set(MY_VOTES, my);
           if (r.stats) stats[p.id] = r.stats;
           rerender();
+          listeners.forEach(fn => fn()); // actualiza pines (estrella de favorito) y la lista
         } catch (err) { msg(form, err.message === 'Failed to fetch' ? 'Sin conexión. Intenta de nuevo.' : err.message); send.disabled = false; }
       });
     }
@@ -248,6 +249,11 @@
     onChange: fn => listeners.push(fn),
     statsFor: id => stats[id],
     closedCount: id => ((stats._closed || {})[id] || 0),
+    isFavorite: id => {
+      const s = stats[id];
+      const minAvg = Number(cfg.favoriteMinAvg ?? 4.8), minVotes = Number(cfg.favoriteMinVotes ?? 10);
+      return !!(s && s.n >= minVotes && s.avg > minAvg);
+    },
     ratingsHTML, voteHTML, reportHTML, mount,
   };
 })();

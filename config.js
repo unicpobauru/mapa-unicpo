@@ -7,4 +7,9 @@ window.MAP_CONFIG = {
   // Si queda vacía, la nota de los alumnos y los reportes no aparecen
   // (para probarlos sin backend, abre el mapa con ?demo al final de la URL).
   apiUrl: 'https://script.google.com/macros/s/AKfycbxeutDV0JJZ4U-LnuX-lB3aplhIScjjiip-lEi_M1WT8OCuZ8gfYVg6FqDRNMUxpx75/exec',
+
+  // "Favorito UniCPO": estrellita en el pin cuando la nota de los alumnos es MAYOR que favoriteMinAvg
+  // con al menos favoriteMinVotes votos.
+  favoriteMinAvg: 4.8,
+  favoriteMinVotes: 10,
 };

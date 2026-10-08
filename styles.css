@@ -241,3 +241,15 @@ button.rate { font: inherit; text-align: left; cursor: pointer; }
 .maybe-closed { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 10px; padding: 10px 12px; border-radius: 14px;
   background: #fff4e5; border: 1.5px solid #f5c26b; color: #6b4300; font-size: 13.5px; line-height: 1.45; }
 .mk.is-maybe-closed .mk-dot, .mk.is-maybe-closed .mk-photo { opacity: .45; filter: grayscale(1); }
+
+/* "Favorito UniCPO": nota de los alumnos > 4,8 con 10+ votos */
+.mk.is-fav .mk-dot, .mk.is-fav .mk-photo { position: relative; }
+.mk.is-fav .mk-dot::after, .mk.is-fav .mk-photo::after {
+  content: '★'; position: absolute; top: -9px; right: -9px; width: 18px; height: 18px; border-radius: 50%;
+  display: grid; place-items: center; background: #f5b301; color: #fff; font-size: 12px; line-height: 1;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.35); z-index: 2;
+}
+.mk.is-fav .mk-photo::after { top: -6px; right: -6px; width: 22px; height: 22px; font-size: 14px; }
+.zoom-low .mk.is-fav .mk-dot::after { top: -9px; right: -11px; width: 13px; height: 13px; font-size: 8px; border-width: 1.5px; }
+.tag--fav { background: #fff3c4; color: #7a5200; }
+.li__fav { font-size: 13px; }

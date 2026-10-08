@@ -189,6 +189,7 @@
     const photos = (p.photos || []).map(f => `<img src="${PHOTO_DIR + f}" alt="${esc(p.name)}" loading="lazy">`).join('');
     const tags = [
       dl ? `<span class="tag">${dl.long}</span>` : '',
+      C.isFavorite(p.id) ? `<span class="tag tag--fav">⭐ Favorito UniCPO</span>` : '',
       p.partner ? `<span class="tag tag--partner">♥ Socia UniCPO</span>` : '',
       p.guia ? `<span class="tag">📘 Guía UniCPO</span>` : '',
       p.aprox ? `<span class="tag tag--warn">📍 Ubicación aproximada</span>` : '',
@@ -259,7 +260,7 @@
       const ico = isRich(p) ? `<span class="li__ico" style="--c:${c.c};background-image:url('${PHOTO_DIR + p.photos[0]}')"></span>` : `<span class="li__ico" style="--c:${c.c}">${c.ico}</span>`;
       const s = C.statsFor(p.id);
       const uni = s && s.n ? ` · 🎓 ${String(s.avg.toFixed(1)).replace('.', ',')}` : '';
-      return `<li><button class="li" data-id="${p.id}">${ico}<span class="li__txt"><span class="li__name">${esc(p.name)}</span><span class="li__sub">${c.label}${uni}${p.rating ? ' · G ' + esc(p.rating) : ''}${p.partner ? ' · Socia UniCPO' : ''}</span></span><span class="li__d">${dl.short}</span></button></li>`;
+      return `<li><button class="li" data-id="${p.id}">${ico}<span class="li__txt"><span class="li__name">${C.isFavorite(p.id) ? '<span class="li__fav" title="Favorito UniCPO">⭐</span> ' : ''}${esc(p.name)}</span><span class="li__sub">${c.label}${uni}${p.rating ? ' · G ' + esc(p.rating) : ''}${p.partner ? ' · Socia UniCPO' : ''}</span></span><span class="li__d">${dl.short}</span></button></li>`;
     }).join('');
   }
   function closeList() { $('#list').hidden = true; }
@@ -309,7 +310,10 @@
       // si la persona ya está votando o reportando, no se redibuja (cerraría el formulario)
       const busy = document.querySelector('#sheet-body [data-vote-form]:not([hidden]), #sheet-body .report__box:not([hidden])');
       if (current && !busy) renderSheet(current);
-      markers.forEach(m => m.el.classList.toggle('is-maybe-closed', !!C.closedCount(m.place.id)));
+      markers.forEach(m => {
+        m.el.classList.toggle('is-maybe-closed', !!C.closedCount(m.place.id));
+        m.el.classList.toggle('is-fav', C.isFavorite(m.place.id));
+      });
       if (!$('#list').hidden) renderList();
     });
     C.load();
