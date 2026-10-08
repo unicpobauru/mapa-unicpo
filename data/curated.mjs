@@ -13,23 +13,25 @@ export const UNICPO = [
 
 export const HOSPEDAJE = [
   // --- Aliada Tânia Alves (Airbnb / apartamentos) ---
-  { id: 'tania-casa-1', cat: 'airbnb', name: 'Tânia Alves · Airbnb Casa 1', lat: -22.32795, lon: -49.05985, aprox: true, partner: true,
+  { id: 'tania-casa-1', cat: 'airbnb', name: 'Tânia Alves · Airbnb Casa 1', lat: -22.32795, lon: -49.05985, partner: true,
     info: 'Ideal para compartir con compañeros: buen precio al dividir entre varios.',
     near: 'Cerca del edificio Hermínio Pinto', photos: ['tania-casa-1.jpg'],
     links: { site: 'https://drive.google.com/file/d/190WyHszy9Rkc0PKJ98-Dn-IVLmr1ricn/view?usp=sharing', whatsapp: WA_TANIA, club: CLUB_TANIA } },
-  { id: 'tania-casa-2', cat: 'airbnb', name: 'Tânia Alves · Airbnb Casa 2', lat: -22.33115, lon: -49.06150, aprox: true, partner: true,
+  { id: 'tania-casa-2', cat: 'airbnb', name: 'Tânia Alves · Airbnb Casa 2', lat: -22.3302959, lon: -49.0606348, partner: true,
     info: 'Ideal para compartir con compañeros: buen precio al dividir entre varios.',
-    near: 'Cerca del edificio nuevo', photos: ['tania-casa-2.jpg'],
+    addr: 'R. Manoel Pereira Rolla, 2-41 · Vila Nova Cidade Universitária', photos: ['tania-casa-2.jpg'],
     links: { site: 'https://drive.google.com/file/d/1TJmsqH-RatkTy5y0GNOR7QBu4SZA7Xtj/view?usp=drive_link', whatsapp: WA_TANIA, club: CLUB_TANIA } },
   { id: 'tania-res-vr', cat: 'airbnb', name: 'Residencial Vitória Régia · Tânia Alves', lat: -22.329109, lon: -49.059225, partner: true,
     rating: '3,9', reviews: 13, info: 'Apartamento amueblado. Hasta 2 huéspedes.', addr: 'R. Raposo Tavares, 11-45',
     photos: ['tania-residencial-vr.jpg'],
     links: { site: 'https://drive.google.com/file/d/1Dx8_tjHSYu0IXEpaaGyVJdDusIhGLyjv/view?usp=drive_link', whatsapp: WA_TANIA, club: CLUB_TANIA } },
-  { id: 'tania-ibis-eco', cat: 'airbnb', name: 'Depto. "Ibis Económico" · Tânia Alves', lat: -22.33160, lon: -49.06305, aprox: true, partner: true,
-    info: 'Departamento hasta 4 huéspedes.', near: 'Cerca del edificio nuevo', photos: ['tania-ibis-economico.jpg'],
+  // Los dos "Ibis" son apartamentos del mismo edificio (Residencial Ibis, -22.3285598,-49.0603118):
+  // cada pin va ~6 m a un lado para que se puedan tocar los dos al acercar el mapa.
+  { id: 'tania-ibis-eco', cat: 'airbnb', name: 'Depto. "Ibis Económico" · Tânia Alves', lat: -22.3285598, lon: -49.0603718, partner: true,
+    info: 'Departamento hasta 4 huéspedes. Mismo edificio que el depto. «Ibis Ejecutivo».', addr: 'Residencial Ibis · R. Homero Chermont, 1-50 · Jardim Brasil', photos: ['tania-ibis-economico.jpg'],
     links: { site: 'https://drive.google.com/file/d/17mLvxNr43mpZl4fSBAjvEUlbDVc_Sm7t/view?usp=drive_link', whatsapp: WA_TANIA, club: CLUB_TANIA } },
-  { id: 'tania-ibis-ejec', cat: 'airbnb', name: 'Depto. "Ibis Ejecutivo" · Tânia Alves', lat: -22.32965, lon: -49.06330, aprox: true, partner: true,
-    info: 'TV en la habitación y muebles más modernos. Hasta 4 huéspedes.', near: 'Cerca del edificio nuevo', photos: ['tania-ibis-ejecutivo.jpg'],
+  { id: 'tania-ibis-ejec', cat: 'airbnb', name: 'Depto. "Ibis Ejecutivo" · Tânia Alves', lat: -22.3285598, lon: -49.0602518, partner: true,
+    info: 'TV en la habitación y muebles más modernos. Hasta 4 huéspedes. Mismo edificio que el depto. «Ibis Económico».', addr: 'Residencial Ibis · R. Homero Chermont, 1-50 · Jardim Brasil', photos: ['tania-ibis-ejecutivo.jpg'],
     links: { site: 'https://drive.google.com/file/d/17mLvxNr43mpZl4fSBAjvEUlbDVc_Sm7t/view?usp=drive_link', whatsapp: WA_TANIA, club: CLUB_TANIA } },
 
   // --- Hoteles muy cercanos (a pie) ---
