@@ -233,3 +233,6 @@ button.rate { font: inherit; text-align: left; cursor: pointer; }
 /* El pin de UniCPO no debe robar el toque de los pines pequeños que quedan debajo */
 .mk--unicpo { pointer-events: none; }
 .mk--unicpo .mk-unicpo__pin { pointer-events: auto; }
+
+/* [hidden] tiene que ganar a display:flex/grid de .btn, .p-actions etc. */
+[hidden] { display: none !important; }

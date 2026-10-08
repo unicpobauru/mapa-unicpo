@@ -8,6 +8,8 @@
   const API = (cfg.apiUrl || '').trim();
   const DEMO = !API && /[?&]demo\b/.test(location.search);
   const ENABLED = !!API || DEMO;
+  // en demo, "mi nota" se guarda aparte para no mezclarse con los votos reales
+  const MY_VOTES = DEMO ? 'demo-my-votes' : 'mapa-my-votes';
   const VOTABLE = ['restaurante', 'bar', 'cafe', 'hotel', 'airbnb', 'mercado', 'gimnasio', 'parque', 'shopping'];
   const COMM = {
     facil: { ico: '😊', label: 'Fácil' },
@@ -95,7 +97,7 @@
 
     // El cuadro de la nota UniCPO también es el botón para votar: queda arriba en la ficha,
     // visible sin tener que bajar (en hoteles con foto el formulario queda bajo el pliegue).
-    const mine = store.get('mapa-my-votes', {})[p.id];
+    const mine = store.get(MY_VOTES, {})[p.id];
     const cta = `<span class="rate__cta">${mine ? 'Cambiar mi nota ›' : 'Calificar ›'}</span>`;
     let uni;
     if (s && s.n) {
@@ -122,7 +124,7 @@
 
   function voteHTML(p) {
     if (!ENABLED || !VOTABLE.includes(p.cat)) return '';
-    const mine = store.get('mapa-my-votes', {})[p.id];
+    const mine = store.get(MY_VOTES, {})[p.id];
     return `<div class="vote" data-vote>
       <button class="btn btn--rate btn--full" data-vote-open>${mine ? `Tu nota: ${'★'.repeat(mine.stars)} · Cambiar` : '⭐ Calificar este lugar'}</button>
       <form class="vote__form" data-vote-form hidden>
@@ -178,7 +180,7 @@
       const form = vote.querySelector('[data-vote-form]');
       const send = vote.querySelector('[data-vote-send]');
       let stars = 0;
-      const mine = store.get('mapa-my-votes', {})[p.id];
+      const mine = store.get(MY_VOTES, {})[p.id];
       const paint = () => vote.querySelectorAll('.star').forEach(b => { const on = +b.dataset.star <= stars; b.classList.toggle('is-on', on); b.setAttribute('aria-checked', String(+b.dataset.star === stars)); });
       const check = () => { send.disabled = !(stars && form.comm.value && form.alumno.checked); };
       if (mine) { stars = mine.stars; paint(); const r = form.querySelector(`input[name=comm][value="${mine.comm}"]`); if (r) r.checked = true; form.alumno.checked = true; }
@@ -195,7 +197,7 @@
         try {
           const r = await post({ action: 'vote', placeId: p.id, placeName: p.name, stars, comm: form.comm.value, website: form.website.value });
           if (!r.ok) throw new Error(r.error || 'Error');
-          const my = store.get('mapa-my-votes', {}); my[p.id] = { stars, comm: form.comm.value }; store.set('mapa-my-votes', my);
+          const my = store.get(MY_VOTES, {}); my[p.id] = { stars, comm: form.comm.value }; store.set(MY_VOTES, my);
           if (r.stats) stats[p.id] = r.stats;
           rerender();
         } catch (err) { msg(form, err.message === 'Failed to fetch' ? 'Sin conexión. Intenta de nuevo.' : err.message); send.disabled = false; }
