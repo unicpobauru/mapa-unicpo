@@ -35,7 +35,7 @@ const COMM = ['facil', 'esfuerzo', 'dificil'];
 const REPORT_TYPES = { direccion: 'Dirección/ubicación incorrecta', horario: 'Horario incorrecto', cerrado: 'El lugar cerró', otro: 'Otro' };
 const REPORT_STATES = ['Pendiente', 'Resuelto', 'Descartado'];
 const PLACE_STATES = ['Activo', 'Cerrado'];
-const CATEGORIES = ['restaurante', 'bar', 'cafe', 'hotel', 'airbnb', 'farmacia', 'mercado', 'parque', 'salud', 'cambio', 'shopping', 'gimnasio', 'transporte'];
+const CATEGORIES = ['restaurante', 'fastfood', 'bar', 'cafe', 'hotel', 'airbnb', 'farmacia', 'mercado', 'parque', 'salud', 'cambio', 'shopping', 'gimnasio', 'transporte'];
 
 // ---------- HTTP ----------
 

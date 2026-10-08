@@ -18,7 +18,7 @@ const coordTag = (lat, lon) => {
 };
 
 const curated = [...UNICPO, ...HOSPEDAJE, ...GUIA, ...PSD_EXTRA, ...EXTRAS];
-const CAT_MAP = { farmacia: 'farmacia', restaurante: 'restaurante', bar: 'bar', mercado: 'mercado', cafe: 'cafe', saude: 'salud', cambio: 'cambio', hotel: 'hotel', academia: 'gimnasio' };
+const CAT_MAP = { farmacia: 'farmacia', restaurante: 'restaurante', fastfood: 'fastfood', bar: 'bar', mercado: 'mercado', cafe: 'cafe', saude: 'salud', cambio: 'cambio', hotel: 'hotel', academia: 'gimnasio' };
 
 const rows = fs.readFileSync(path.join(dir, 'google-places.tsv'), 'utf8').trim().split(/\r?\n/).slice(1);
 const google = rows.map(l => {
@@ -43,7 +43,7 @@ const unknownIg = Object.keys(ig).filter(id => !all.some(p => p.id === id));
 if (unknownIg.length) console.warn('instagram.json tiene ids que no existen:', unknownIg.join(', '));
 
 // Correcciones de la planilla (hoja "Correcciones"), bajadas cada lunes por .github/workflows/semanal.yml
-const CATS_OK = ['restaurante', 'bar', 'cafe', 'hotel', 'airbnb', 'farmacia', 'mercado', 'parque', 'salud', 'cambio', 'shopping', 'gimnasio', 'transporte'];
+const CATS_OK = ['restaurante', 'fastfood', 'bar', 'cafe', 'hotel', 'airbnb', 'farmacia', 'mercado', 'parque', 'salud', 'cambio', 'shopping', 'gimnasio', 'transporte'];
 const inBauru = (lat, lon) => lat > -22.45 && lat < -22.2 && lon > -49.2 && lon < -48.9;
 const corrFile = path.join(dir, 'corrections.json');
 const corrections = fs.existsSync(corrFile) ? (JSON.parse(fs.readFileSync(corrFile, 'utf8')).corrections || []) : [];

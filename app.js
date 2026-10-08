@@ -6,6 +6,7 @@
     airbnb:      { label: 'Airbnb · Tânia',     ico: '🏡', c: '#ff385c' },
     farmacia:    { label: 'Farmacias',          ico: '💊', c: '#e5484d' },
     restaurante: { label: 'Restaurantes',       ico: '🍽️', c: '#f59e0b' },
+    fastfood:    { label: 'Fast food',          ico: '🍔', c: '#ea580c' },
     bar:         { label: 'Bares',              ico: '🍺', c: '#8b5cf6' },
     mercado:     { label: 'Supermercados',      ico: '🛒', c: '#0ea5b7' },
     cafe:        { label: 'Cafés y panaderías', ico: '☕', c: '#a0632b' },

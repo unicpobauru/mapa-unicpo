@@ -11,7 +11,7 @@
   const ENABLED = !!API || DEMO;
   // en demo, "mi nota" se guarda aparte para no mezclarse con los votos reales
   const MY_VOTES = DEMO ? 'demo-my-votes' : 'mapa-my-votes';
-  const VOTABLE = ['restaurante', 'bar', 'cafe', 'hotel', 'airbnb', 'mercado', 'gimnasio', 'parque', 'shopping'];
+  const VOTABLE = ['restaurante', 'fastfood', 'bar', 'cafe', 'hotel', 'airbnb', 'mercado', 'gimnasio', 'parque', 'shopping'];
   const COMM = {
     facil: { ico: '😊', label: 'Fácil' },
     esfuerzo: { ico: '😐', label: 'Con esfuerzo' },
