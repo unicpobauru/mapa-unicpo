@@ -176,17 +176,15 @@
   }
 
   // ---------- sheet ----------
-  function openPlace(p, fly) {
-    closeList();
-    current = p;
-    markers.forEach(m => m.el.classList.toggle('is-active', m.place === p));
+  const C = window.Community;
+
+  function renderSheet(p) {
     const cat = CATS[p.cat] || { label: 'UniCPO', ico: '🎓', c: '#0b2a4a' };
     const dl = p.cat === 'unicpo' ? null : distLabel(p);
     const L = p.links || {};
     const photos = (p.photos || []).map(f => `<img src="${PHOTO_DIR + f}" alt="${esc(p.name)}" loading="lazy">`).join('');
     const tags = [
       dl ? `<span class="tag">${dl.long}</span>` : '',
-      p.rating ? `<span class="tag">⭐ ${esc(p.rating)}${p.reviews ? ` <span style="opacity:.6">(${p.reviews.toLocaleString('es')})</span>` : ''}</span>` : '',
       p.partner ? `<span class="tag tag--partner">♥ Socia UniCPO</span>` : '',
       p.guia ? `<span class="tag">📘 Guía UniCPO</span>` : '',
       p.aprox ? `<span class="tag tag--warn">📍 Ubicación aproximada</span>` : '',
@@ -194,6 +192,7 @@
     const actions = [];
     if (L.whatsapp) actions.push(`<a class="btn btn--wa" target="_blank" rel="noopener" href="${L.whatsapp}?text=${encodeURIComponent(WA_MSG(p.name))}">WhatsApp</a>`);
     if (L.site) actions.push(`<a class="btn btn--primary" target="_blank" rel="noopener" href="${esc(L.site)}">${/booking|airbnb|omnibees/.test(L.site) ? 'Reservar' : 'Ver fotos / info'}</a>`);
+    if (p.ig) actions.push(`<a class="btn btn--ig" target="_blank" rel="noopener" href="https://www.instagram.com/${encodeURIComponent(p.ig)}/">@${esc(p.ig)}</a>`);
     if (p.tel && !L.whatsapp) actions.push(`<a class="btn btn--ghost" href="tel:${p.tel.replace(/\D/g, '')}">Llamar</a>`);
     if (p.cat !== 'unicpo' && !p.aprox) actions.push(`<a class="btn btn--ghost" target="_blank" rel="noopener" href="${gmapsDir(p, dl && dl.walk)}">Cómo llegar</a>`);
     actions.push(`<a class="btn btn--ghost" target="_blank" rel="noopener" href="${gmapsSearch(p)}">Ver en Google Maps</a>`);
@@ -204,14 +203,25 @@
       <span class="p-cat" style="--c:${cat.c}">${cat.ico} ${cat.label}${p.far ? ' · más alejado' : ''}</span>
       <h2 class="p-name">${esc(p.name)}</h2>
       <div class="p-meta">${tags}</div>
+      ${C.ratingsHTML(p)}
       ${p.info ? `<p class="p-info">${esc(p.info)}</p>` : ''}
       ${p.addr ? `<p class="p-row"><b>Dirección:</b> ${esc(p.addr)}</p>` : ''}
       ${p.near ? `<p class="p-row"><b>Zona:</b> ${esc(p.near)}${p.aprox ? ' — confirma la dirección exacta por WhatsApp.' : ''}</p>` : ''}
       ${p.hours ? `<p class="p-row"><b>Horario:</b> ${esc(p.hours)}</p>` : ''}
       ${p.tel ? `<p class="p-row"><b>Teléfono:</b> ${esc(p.tel)}</p>` : ''}
       <div class="p-actions">${actions.join('')}</div>
+      ${C.voteHTML(p)}
       ${L.club ? `<a class="club" target="_blank" rel="noopener" href="${L.club}"><b>Club de Beneficios Tânia Alves</b>Quien se hospeda con nuestra socia tiene acceso a descuentos. Toca para consultar.</a>` : ''}
+      ${C.reportHTML(p)}
     `;
+    C.mount($('#sheet-body'), p, () => { if (current === p) renderSheet(p); });
+  }
+
+  function openPlace(p, fly) {
+    closeList();
+    current = p;
+    markers.forEach(m => m.el.classList.toggle('is-active', m.place === p));
+    renderSheet(p);
     $('#sheet').hidden = false;
     $('#sheet').scrollTop = 0;
     document.body.classList.add('sheet-open');
@@ -240,7 +250,9 @@
     $('#list-items').innerHTML = items.map(({ p, dl }) => {
       const c = CATS[p.cat];
       const ico = isRich(p) ? `<span class="li__ico" style="--c:${c.c};background-image:url('${PHOTO_DIR + p.photos[0]}')"></span>` : `<span class="li__ico" style="--c:${c.c}">${c.ico}</span>`;
-      return `<li><button class="li" data-id="${p.id}">${ico}<span class="li__txt"><span class="li__name">${esc(p.name)}</span><span class="li__sub">${c.label}${p.rating ? ' · ⭐ ' + esc(p.rating) : ''}${p.partner ? ' · Socia UniCPO' : ''}</span></span><span class="li__d">${dl.short}</span></button></li>`;
+      const s = C.statsFor(p.id);
+      const uni = s && s.n ? ` · 🎓 ${String(s.avg.toFixed(1)).replace('.', ',')}` : '';
+      return `<li><button class="li" data-id="${p.id}">${ico}<span class="li__txt"><span class="li__name">${esc(p.name)}</span><span class="li__sub">${c.label}${uni}${p.rating ? ' · G ' + esc(p.rating) : ''}${p.partner ? ' · Socia UniCPO' : ''}</span></span><span class="li__d">${dl.short}</span></button></li>`;
     }).join('');
   }
   function closeList() { $('#list').hidden = true; }
@@ -285,6 +297,12 @@
     const id = decodeURIComponent(location.hash.slice(1));
     const target = id && PLACES.find(p => p.id === id);
     if (target) openPlace(target, true);
+    // las notas de los alumnos llegan después; se refresca lo que esté abierto
+    C.onChange(() => {
+      if (current) renderSheet(current);
+      if (!$('#list').hidden) renderList();
+    });
+    C.load();
   }
   window.addEventListener('hashchange', () => {
     const p = PLACES.find(x => x.id === decodeURIComponent(location.hash.slice(1)));
