@@ -23,8 +23,20 @@ Tudo fica numa **Planilha Google da UniCPO**. É grátis e não precisa de cart�
 - **Votos**: a aba *Votos* tem uma linha por aluno e lugar. Se o aluno votar de novo, a linha dele é atualizada (não duplica).
   Para tirar um voto falso, apague a linha. A média no site se atualiza em até 1 minuto.
 - **Reportes**: cada um chega como linha na aba *Reportes* com Estado = `Pendiente`, e você recebe um e-mail.
-  Confira, corrija o mapa se for o caso (peça ao Claude ou edite `data/curated.mjs` / `data/google-places.tsv`) e mude o Estado para `Resuelto` ou `Descartado`.
-  Os reportes **nunca aparecem no site**: nenhum estabelecimento é "acusado" publicamente.
+  Confira, corrija o mapa na aba *Correcciones* se for o caso e mude o Estado para `Resuelto` ou `Descartado`.
+  Os reportes **nunca aparecem no site**, com uma exceção: se **3 aparelhos diferentes** reportarem "El lugar cerró"
+  e os reportes continuarem `Pendiente`, o mapa mostra "⚠️ Posiblemente cerrado" e apaga o pin.
+  Marcar como `Descartado` tira o aviso na hora; confirmar o fechamento na aba *Correcciones* tira o lugar do mapa.
+- **Correcciones** (o mapa se atualiza sozinho **toda segunda às 8h**):
+  - **Mudar um lugar:** escolha o lugar na coluna *Lugar ID* (lista suspensa) e preencha **só** o que mudou
+    (Dirección, Horario, Teléfono, Instagram, Descripción…). O que ficar vazio continua igual.
+  - **Lugar fechou:** escolha o lugar e em *Estado* coloque `Cerrado`. Ele sai do mapa.
+  - **Lugar novo:** deixe *Lugar ID* **vazio** e preencha Nombre, Categoría, Latitud e Longitud
+    (no Google Maps: clique com o botão direito no lugar → os números aparecem no topo do menu; clique para copiar).
+  - A coluna *Nota interna* nunca é publicada.
+  - Não quer esperar a segunda? No GitHub: **Actions → "Actualización semanal del mapa" → Run workflow**.
+- **Lugares**: lista de todos os lugares do mapa com o ID e o link. Atualiza sozinha toda segunda às 6h
+  (ou no menu da planilha **Mapa UniCPO → Actualizar lista de lugares**).
 
 ## Proteções que já vêm no código
 
@@ -35,4 +47,6 @@ Tudo fica numa **Planilha Google da UniCPO**. É grátis e não precisa de cart�
 
 ## Se mudar o `Code.gs` depois
 
-**Implantar → Gerenciar implantações → ✏️ editar → Versão: Nova versão → Implantar.** A URL continua a mesma.
+1. Cole o código novo no editor e salve.
+2. Rode **`setup`** de novo (pode pedir autorização para permissões novas: é normal).
+3. **Implantar → Gerenciar implantações → ✏️ editar → Versão: Nova versão → Implantar.** A URL continua a mesma.
