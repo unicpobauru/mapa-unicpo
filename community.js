@@ -60,9 +60,12 @@
     return res.json();
   }
 
+  // exemplo fixo no demo: Bar da Rosa já aparece como Favorito UniCPO (14 votos, média 4,9)
+  const DEMO_SEED = { 'bar-da-rosa-n8bz': { n: 14, sum: 68.6, comm: { facil: 11, esfuerzo: 3, dificil: 0 } } };
   function demoStats() {
     const votes = store.get('demo-votes', {});
     const out = {};
+    Object.entries(DEMO_SEED).forEach(([id, s]) => { out[id] = { n: s.n, sum: s.sum, comm: Object.assign({}, s.comm) }; });
     Object.values(votes).forEach(v => {
       const s = out[v.placeId] || (out[v.placeId] = { n: 0, sum: 0, comm: { facil: 0, esfuerzo: 0, dificil: 0 } });
       s.n++; s.sum += v.stars; s.comm[v.comm]++;
