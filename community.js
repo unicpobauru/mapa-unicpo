@@ -61,7 +61,7 @@
   }
 
   // demo: lugar fictício para gravar vídeo/apresentação (não existe no mapa real nem na planilha)
-  const DEMO_PLACE = { id: 'demo-bar-del-manual', cat: 'bar', name: 'Bar del Manual', lat: -22.3316, lon: -49.0633, rating: '4,6', reviews: 1240, info: 'Lugar de ejemplo · solo existe en la demo' };
+  const DEMO_PLACE = { id: 'demo-bar-del-manual', cat: 'bar', name: 'Bar del Manual', lat: -22.3316, lon: -49.0633, rating: '4,6', reviews: 1240, ig: 'unicpo.oficial', info: 'Lugar de ejemplo · solo existe en la demo' };
   if (DEMO && Array.isArray(window.PLACES) && !window.PLACES.some(p => p.id === DEMO_PLACE.id)) window.PLACES.push(DEMO_PLACE);
   const DEMO_SEED = { [DEMO_PLACE.id]: { n: 40, sum: 196, comm: { facil: 31, esfuerzo: 8, dificil: 1 } } };
   function demoStats() {
