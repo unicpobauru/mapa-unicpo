@@ -60,8 +60,8 @@
     return res.json();
   }
 
-  // exemplo fixo no demo: Bar da Rosa já aparece como Favorito UniCPO (14 votos, média 4,9)
-  const DEMO_SEED = { 'bar-da-rosa-n8bz': { n: 14, sum: 68.6, comm: { facil: 11, esfuerzo: 3, dificil: 0 } } };
+  // exemplo fixo no demo: Bar da Rosa já aparece como Favorito UniCPO (40 votos, média 4,9: aguenta o voto de teste de quem gravar)
+  const DEMO_SEED = { 'bar-da-rosa-n8bz': { n: 40, sum: 196, comm: { facil: 31, esfuerzo: 8, dificil: 1 } } };
   function demoStats() {
     const votes = store.get('demo-votes', {});
     const out = {};
