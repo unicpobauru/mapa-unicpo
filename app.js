@@ -25,7 +25,8 @@
   const START_ZOOM = 16;
   const WA_MSG = n => `¡Hola! Soy estudiante de UniCPO y vi "${n}" en el mapa del Manual de Supervivencia. ¿Tiene disponibilidad?`;
 
-  const active = new Set(ORDER);
+  // começa limpo: só a UniCPO aparece; a pessoa ativa o que procura nos filtros
+  const active = new Set();
   const markers = new Map(); // id -> { place, el, handle }
   let map = null;
   let current = null;
@@ -60,7 +61,7 @@
     if (p.cat === 'unicpo') {
       el.classList.add('mk--unicpo');
       const main = p.id === 'unicpo-sede';
-      el.innerHTML = `<div class="mk-unicpo ${main ? '' : 'is-secondary'}"><div class="mk-unicpo__pin"><span>U</span></div><div class="mk-unicpo__label">${main ? 'UniCPO' : 'UniCPO · H. Pinto'}</div></div>`;
+      el.innerHTML = `<div class="mk-unicpo ${main ? 'is-main' : 'is-secondary'}">${main ? '<span class="mk-unicpo__halo"></span>' : ''}<div class="mk-unicpo__pin"><span>U</span></div><div class="mk-unicpo__label">${main ? 'UniCPO' : 'UniCPO · H. Pinto'}</div></div>`;
       return el;
     }
     const cat = CATS[p.cat];
@@ -171,6 +172,8 @@
     }
     applyFilters(); renderChips();
     if (!$('#list').hidden) renderList();
+    hideCoach();
+    if (active.has('hotel') || active.has('airbnb')) showHint();
   });
   function applyFilters() {
     markers.forEach(({ place, handle }) => {
@@ -277,7 +280,42 @@
 
   // ---------- misc ----------
   function hideHint() { $('#hint').classList.add('is-hidden'); }
-  setTimeout(hideHint, 9000);
+  let hintShown = false;
+  function showHint() {
+    if (hintShown) return; hintShown = true;
+    $('#hint').classList.remove('is-hidden');
+    setTimeout(hideHint, 6000);
+  }
+
+  // ---------- coach: balão que ensina a usar os filtros ----------
+  let coachTimer = null;
+  function hideCoach() {
+    clearTimeout(coachTimer);
+    const c = $('#coach'); if (c) c.classList.remove('is-on');
+  }
+  function startCoach() {
+    coachTimer = setTimeout(() => {
+      if (active.size || current) return;
+      $('#coach').classList.add('is-on');
+      nudgeChips();
+      coachTimer = setTimeout(hideCoach, 7000);
+    }, 2500);
+  }
+  // empurrãozinho nos filtros para mostrar que dá para arrastar para o lado
+  function nudgeChips() {
+    const nav = $('#chips');
+    if (nav.scrollWidth <= nav.clientWidth || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    nav.scrollTo({ left: 140, behavior: 'smooth' });
+    setTimeout(() => nav.scrollTo({ left: 0, behavior: 'smooth' }), 900);
+  }
+  // seta "›" na borda direita enquanto houver mais filtros para ver
+  function updateChipsEdge() {
+    const nav = $('#chips');
+    document.body.classList.toggle('chips-more', nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 8);
+  }
+  $('#chips').addEventListener('scroll', updateChipsEdge, { passive: true });
+  window.addEventListener('resize', updateChipsEdge);
+  $('#coach').addEventListener('click', hideCoach);
   $('#btn-home').addEventListener('click', () => { closeSheet(); map.fly(HOME, START_ZOOM); });
   let me = null;
   $('#btn-me').addEventListener('click', () => {
@@ -302,10 +340,11 @@
       const handle = map.add(p, el, z, () => openPlace(p, false));
       markers.set(p.id, { place: p, el, handle });
     });
-    renderChips();
     const id = decodeURIComponent(location.hash.slice(1));
     const target = id && PLACES.find(p => p.id === id);
-    if (target) openPlace(target, true);
+    if (target && target.cat !== 'unicpo') active.add(target.cat);
+    applyFilters(); renderChips(); updateChipsEdge();
+    if (target) openPlace(target, true); else startCoach();
     // las notas de los alumnos llegan después; se refresca lo que esté abierto
     C.onChange(() => {
       // si la persona ya está votando o reportando, no se redibuja (cerraría el formulario)
@@ -321,7 +360,10 @@
   }
   window.addEventListener('hashchange', () => {
     const p = PLACES.find(x => x.id === decodeURIComponent(location.hash.slice(1)));
-    if (p && p !== current) openPlace(p, true);
+    if (p && p !== current) {
+      if (p.cat !== 'unicpo' && !active.has(p.cat)) { active.add(p.cat); applyFilters(); renderChips(); }
+      openPlace(p, true);
+    }
   });
 
   const key = (window.MAP_CONFIG || {}).googleMapsApiKey;

@@ -253,3 +253,50 @@ button.rate { font: inherit; text-align: left; cursor: pointer; }
 .zoom-low .mk.is-fav .mk-dot::after { top: -9px; right: -11px; width: 13px; height: 13px; font-size: 8px; border-width: 1.5px; }
 .tag--fav { background: #fff3c4; color: #7a5200; }
 .li__fav { font-size: 13px; }
+
+/* ---------- Começo limpo: filtros desligados, coach e destaque da UniCPO ---------- */
+/* desligado: chip branco, texto apagado, ícone sem cor */
+.chip[aria-pressed="false"] { opacity: 1; background: rgba(255,255,255,.96); color: #5b6b7c; border-color: #d5dde6; box-shadow: 0 1px 4px rgba(11,42,74,.10); }
+.chip[aria-pressed="false"] .chip__ico { background: #eef2f6; filter: grayscale(1); opacity: .75; }
+.chip[aria-pressed="false"] .chip__n { opacity: .5; }
+/* ligado: cor cheia + check */
+.chip[aria-pressed="true"]:not(.chip--all) .chip__n::after { content: " ✓"; }
+.chip.chip--all[aria-pressed="false"] { background: #fff; color: var(--navy); border-color: var(--navy); }
+
+/* seta na borda direita: há mais filtros para o lado */
+.chips-edge {
+  position: fixed; z-index: 19; right: 0; top: calc(78px + var(--safe-top)); height: 52px; width: 44px;
+  display: grid; place-items: center; padding-bottom: 4px; font-size: 26px; font-weight: 700; color: var(--navy);
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.95) 60%);
+  pointer-events: none; opacity: 0; transition: opacity .2s;
+}
+body.chips-more .chips-edge { opacity: 1; animation: edge-bob 1.6s ease-in-out infinite; }
+@keyframes edge-bob { 0%,100% { text-indent: 0; } 50% { text-indent: 8px; } }
+
+/* balão de ajuda */
+.coach {
+  position: fixed; z-index: 21; left: 12px; right: 12px; top: calc(136px + var(--safe-top)); max-width: 360px;
+  background: var(--navy); color: #fff; border-radius: 16px; padding: 12px 16px 12px; box-shadow: 0 12px 30px rgba(11,42,74,.35);
+  opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .35s, transform .35s;
+}
+.coach.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.coach__arrow { position: absolute; top: -8px; left: 150px; width: 16px; height: 16px; background: var(--navy); transform: rotate(45deg); border-radius: 3px; }
+.coach__txt { margin: 0; font-size: 14px; line-height: 1.4; }
+.coach__swipe { margin: 6px 0 0; font-size: 12.5px; font-weight: 700; color: #7cc4ff; }
+.coach__hand { display: inline-block; animation: hand 1.2s ease-in-out infinite; }
+@keyframes hand { 0%,100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
+
+/* UniCPO principal: maior e com halo pulsando */
+.mk-unicpo.is-main { position: relative; }
+.mk-unicpo.is-main .mk-unicpo__pin { width: 56px; height: 56px; border-width: 3.5px; }
+.mk-unicpo.is-main .mk-unicpo__pin span { font-size: 23px; }
+.mk-unicpo.is-main .mk-unicpo__label { font-size: 13px; padding: 4px 11px; box-shadow: 0 3px 10px rgba(11,42,74,.35); }
+.mk-unicpo__halo {
+  position: absolute; left: 50%; top: 28px; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%;
+  background: rgba(29,111,214,.35); animation: halo 2.2s ease-out infinite; pointer-events: none;
+}
+@keyframes halo { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.4); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-unicpo__halo, .coach__hand, body.chips-more .chips-edge { animation: none; }
+}

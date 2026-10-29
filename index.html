@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="styles.css?v=23">
+  <link rel="stylesheet" href="styles.css?v=24">
   <!-- Microsoft Clarity (fora do ?demo, para gravações e testes não entrarem nos dados) -->
   <script type="text/javascript">
     if (!/[?&]demo(&|=|$)/.test(location.search)) (function(c,l,a,r,i,t,y){
@@ -37,6 +37,13 @@
   </header>
 
   <nav class="chips" id="chips" aria-label="Filtros"></nav>
+  <span class="chips-edge" aria-hidden="true">›</span>
+
+  <div class="coach" id="coach" role="status">
+    <span class="coach__arrow" aria-hidden="true"></span>
+    <p class="coach__txt"><b>Activa aquí lo que buscas:</b> hoteles, Airbnb, restaurantes, bares y más.</p>
+    <p class="coach__swipe">Desliza para ver todo <span class="coach__hand" aria-hidden="true">👉</span></p>
+  </div>
 
   <div class="fabs">
     <button class="fab" id="btn-me" aria-label="Mi ubicación">
@@ -45,7 +52,7 @@
     <button class="fab fab--brand" id="btn-home" aria-label="Volver a UniCPO">U</button>
   </div>
 
-  <div class="hint" id="hint">
+  <div class="hint is-hidden" id="hint">
     <span class="hint__dot"></span><span>Toca los <b>pines con foto</b> para ver el alojamiento</span>
   </div>
 
@@ -64,10 +71,10 @@
     <ul class="list__items" id="list-items"></ul>
   </section>
 
-  <script src="config.js?v=23"></script>
-  <script src="data/places.js?v=23"></script>
+  <script src="config.js?v=24"></script>
+  <script src="data/places.js?v=24"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script src="community.js?v=23"></script>
-  <script src="app.js?v=23"></script>
+  <script src="community.js?v=24"></script>
+  <script src="app.js?v=24"></script>
 </body>
 </html>

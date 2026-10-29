@@ -6,9 +6,9 @@ const CLUB_TANIA = 'https://drive.google.com/file/d/1TFcydsAy_OjfL4YdSOMAE88G5cr
 
 export const UNICPO = [
   { id: 'unicpo-sede', cat: 'unicpo', name: 'UniCPO · Edificio nuevo', lat: -22.33040, lon: -49.06221,
-    addr: 'R. Ver. Joaquim da Silva Martha, 21-50 · Vila Nova Cidade Universitária', info: 'Aquí son las clases. Punto de partida de todas las distancias.' },
+    addr: 'R. Ver. Joaquim da Silva Martha, 21-50 · Vila Nova Cidade Universitária', info: 'Aquí son las clases. Punto de partida de todas las distancias.', ig: 'unicpo.oficial' },
   { id: 'unicpo-hp', cat: 'unicpo', name: 'UniCPO · Edificio Hermínio Pinto', lat: -22.32866, lon: -49.06047,
-    addr: 'R. Hermínio Pinto, Quadra 13 · Vila Brunhari', info: 'Unidad Nações (edificio antiguo).' },
+    addr: 'R. Hermínio Pinto, Quadra 13 · Vila Brunhari', info: 'Unidad Nações (edificio antiguo).', ig: 'unicpo.oficial' },
 ];
 
 export const HOSPEDAJE = [
