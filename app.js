@@ -159,7 +159,7 @@
     const n = counts();
     const nav = $('#chips');
     const all = active.size === ORDER.length;
-    nav.innerHTML = `<button class="chip chip--all" data-all aria-pressed="${all}">${all ? 'Quitar todos' : 'Ver todos'}</button>` +
+    nav.innerHTML = `<button class="chip chip--all" data-all aria-pressed="${all}">${all ? 'Desactivar todos' : 'Activar todos'}</button>` +
       ORDER.filter(k => n[k]).map(k => `<button class="chip" data-cat="${k}" aria-pressed="${active.has(k)}" style="--c:${CATS[k].c}"><span class="chip__ico">${CATS[k].ico}</span>${CATS[k].label}<span class="chip__n">${n[k]}</span></button>`).join('');
   }
   $('#chips').addEventListener('click', e => {
@@ -299,7 +299,7 @@
       $('#coach').classList.add('is-on');
       nudgeChips();
       coachTimer = setTimeout(hideCoach, 7000);
-    }, 2500);
+    }, 1200);
   }
   // empurrãozinho nos filtros para mostrar que dá para arrastar para o lado
   function nudgeChips() {
