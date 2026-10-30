@@ -302,16 +302,16 @@
     }, 1200);
   }
   // empurrãozinho nos filtros: vai até quase o fim (dá para ler restaurantes, bares…), espera e volta.
-  // Animação própria: o scroll-snap cancela o scrollTo "smooth" em alguns navegadores.
+  // Animação própria (passos de ~16 ms): o scroll-snap cancela o scrollTo "smooth" em alguns navegadores.
   function glide(nav, to, ms, done, alive = () => true) {
     const from = nav.scrollLeft, t0 = performance.now();
     const ease = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-    (function step(now) {
+    (function step() {
       if (!alive()) return;
-      const t = Math.min(1, (now - t0) / ms);
+      const t = Math.min(1, (performance.now() - t0) / ms);
       nav.scrollLeft = from + (to - from) * ease(t);
-      if (t < 1) requestAnimationFrame(step); else if (done) done();
-    })(t0);
+      if (t < 1) setTimeout(step, 16); else if (done) done();
+    })();
   }
   function nudgeChips() {
     const nav = $('#chips');
