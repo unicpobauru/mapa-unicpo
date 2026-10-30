@@ -301,14 +301,32 @@
       coachTimer = setTimeout(hideCoach, 7000);
     }, 1200);
   }
-  // empurrãozinho nos filtros para mostrar que dá para arrastar para o lado
+  // empurrãozinho nos filtros: vai até quase o fim (dá para ler restaurantes, bares…), espera e volta.
+  // Animação própria: o scroll-snap cancela o scrollTo "smooth" em alguns navegadores.
+  function glide(nav, to, ms, done, alive = () => true) {
+    const from = nav.scrollLeft, t0 = performance.now();
+    const ease = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+    (function step(now) {
+      if (!alive()) return;
+      const t = Math.min(1, (now - t0) / ms);
+      nav.scrollLeft = from + (to - from) * ease(t);
+      if (t < 1) requestAnimationFrame(step); else if (done) done();
+    })(t0);
+  }
   function nudgeChips() {
     const nav = $('#chips');
     if (nav.scrollWidth <= nav.clientWidth || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // vai até quase o fim (dá para ler restaurantes, bares…), espera e volta
+    let stop = false;
+    const cancel = () => { stop = true; nav.style.scrollSnapType = ''; };
+    nav.addEventListener('touchstart', cancel, { once: true, passive: true });
+    nav.addEventListener('pointerdown', cancel, { once: true });
+    nav.style.scrollSnapType = 'none';
     const end = Math.max(0, nav.scrollWidth - nav.clientWidth - 40);
-    nav.scrollTo({ left: end, behavior: 'smooth' });
-    setTimeout(() => nav.scrollTo({ left: 0, behavior: 'smooth' }), 2600);
+    const alive = () => !stop;
+    glide(nav, end, 2600, () => setTimeout(() => {
+      if (stop) return;
+      glide(nav, 0, 1400, () => { nav.style.scrollSnapType = ''; }, alive);
+    }, 900), alive);
   }
   // seta "›" na borda direita enquanto houver mais filtros para ver
   function updateChipsEdge() {
