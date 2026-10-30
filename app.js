@@ -305,8 +305,10 @@
   function nudgeChips() {
     const nav = $('#chips');
     if (nav.scrollWidth <= nav.clientWidth || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    nav.scrollTo({ left: 140, behavior: 'smooth' });
-    setTimeout(() => nav.scrollTo({ left: 0, behavior: 'smooth' }), 900);
+    // vai até quase o fim (dá para ler restaurantes, bares…), espera e volta
+    const end = Math.max(0, nav.scrollWidth - nav.clientWidth - 40);
+    nav.scrollTo({ left: end, behavior: 'smooth' });
+    setTimeout(() => nav.scrollTo({ left: 0, behavior: 'smooth' }), 2600);
   }
   // seta "›" na borda direita enquanto houver mais filtros para ver
   function updateChipsEdge() {
