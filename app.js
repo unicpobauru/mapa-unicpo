@@ -17,7 +17,8 @@
     gimnasio:    { label: 'Gimnasios',          ico: '💪', c: '#475569' },
     transporte:  { label: 'Rodoviária',         ico: '🚌', c: '#334155' },
   };
-  const ORDER = Object.keys(CATS);
+  // ordem dos filtros na barra de cima
+  const ORDER = ['airbnb', 'hotel', 'restaurante', 'bar', 'mercado', 'cafe', 'gimnasio', 'transporte', 'shopping', 'fastfood', 'parque', 'cambio', 'farmacia', 'salud'];
   const PLACES = window.PLACES || [];
   const HOME = PLACES.find(p => p.id === 'unicpo-sede');
   const PHOTO_DIR = 'img/hospedaje/';
